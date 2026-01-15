@@ -73,7 +73,7 @@ export default function RecipeInput({ onConvert, isLoading }) {
 
   return (
     <div className="card">
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Convert Recipe</h2>
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">Konvertera recept</h2>
 
       {/* Input Type Selector */}
       <div className="flex gap-4 mb-6">
@@ -97,7 +97,7 @@ export default function RecipeInput({ onConvert, isLoading }) {
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
-          📷 Image
+          📷 Bild
         </button>
       </div>
 
@@ -106,25 +106,25 @@ export default function RecipeInput({ onConvert, isLoading }) {
         {inputType === 'url' ? (
           <div>
             <label htmlFor="url" className="block text-sm font-medium text-gray-700 mb-2">
-              Recipe URL
+              Recept-URL
             </label>
             <input
               type="url"
               id="url"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              placeholder="https://example.com/recipe"
+              placeholder="https://example.com/recept"
               className="input-field"
               disabled={isLoading}
             />
             <p className="text-xs text-gray-500 mt-1">
-              Example: https://goop.com/recipes/thomas-keller-lemon-tart/
+              Exempel: https://goop.com/recipes/thomas-keller-lemon-tart/
             </p>
           </div>
         ) : (
           <div>
             <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-2">
-              Recipe Image
+              Receptbild
             </label>
             <input
               type="file"
@@ -153,14 +153,14 @@ export default function RecipeInput({ onConvert, isLoading }) {
                     }}
                     className="text-sm text-red-600 hover:text-red-700"
                   >
-                    Remove image
+                    Ta bort bild
                   </button>
                 </div>
               ) : (
                 <div>
                   <div className="text-4xl mb-2">📷</div>
-                  <p className="text-gray-600">Click to upload an image</p>
-                  <p className="text-xs text-gray-500 mt-1">Max size: 5MB</p>
+                  <p className="text-gray-600">Klicka för att ladda upp en bild</p>
+                  <p className="text-xs text-gray-500 mt-1">Max storlek: 5MB</p>
                 </div>
               )}
             </label>
@@ -196,10 +196,10 @@ export default function RecipeInput({ onConvert, isLoading }) {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 />
               </svg>
-              Converting...
+              Konverterar...
             </span>
           ) : (
-            'Convert to Swedish Recipe'
+            'Konvertera till svenskt recept'
           )}
         </button>
       </form>

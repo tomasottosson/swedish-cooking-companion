@@ -67,9 +67,22 @@ export async function convertRecipe(input, apiKey, onProgress) {
 
     if (input.type === 'url') {
       onProgress?.('Fetching recipe from URL...');
-      // Fetch the URL content
-      const response = await fetch(input.url);
-      const html = await response.text();
+      // Fetch the URL content via proxy server to avoid CORS issues
+      const proxyUrl = 'http://localhost:3001/api/fetch-recipe';
+      const response = await fetch(proxyUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ url: input.url }),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Failed to fetch recipe URL');
+      }
+
+      const { html } = await response.json();
 
       userMessage = {
         role: 'user',

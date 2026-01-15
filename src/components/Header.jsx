@@ -12,7 +12,7 @@ export default function Header({ apiKey, onManageApiKey }) {
           <div className="flex items-center gap-4">
             {apiKey && (
               <div className="flex items-center gap-2 bg-blue-700 px-4 py-2 rounded-lg">
-                <span className="text-sm">✓ API Key sparad</span>
+                <span className="text-sm">✓ API-nyckel sparad</span>
                 <button
                   onClick={onManageApiKey}
                   className="text-xs text-blue-200 hover:text-white underline"

@@ -44,12 +44,23 @@ cd swedish-cooking-companion
 npm install
 ```
 
-3. Start the development server:
+3. Start both the proxy server and the development server:
 ```bash
+npm run dev:all
+```
+
+Alternatively, run them separately in two terminals:
+```bash
+# Terminal 1 - Proxy server (required for URL fetching)
+npm run server
+
+# Terminal 2 - Frontend development server
 npm run dev
 ```
 
 4. Open your browser to `http://localhost:3000`
+
+**Note**: The proxy server (port 3001) is required to fetch recipes from URLs due to CORS restrictions. Image uploads work without it.
 
 ## Usage
 
@@ -115,7 +126,9 @@ swedish-cooking-companion/
 ## Development Commands
 
 ```bash
-npm run dev       # Start development server (port 3000)
+npm run dev:all   # Start both proxy server and dev server (recommended)
+npm run server    # Start proxy server only (port 3001)
+npm run dev       # Start frontend dev server only (port 3000)
 npm run build     # Build for production
 npm run preview   # Preview production build
 ```
@@ -168,9 +181,16 @@ The app doesn't just translate - it understands Swedish cooking culture:
 
 ## Troubleshooting
 
+### "Failed to fetch recipe URL" or CORS errors
+- **Make sure the proxy server is running** on port 3001
+- Run `npm run dev:all` to start both servers
+- Check that nothing else is using port 3001
+- If the proxy server won't start, try `npm run server` separately to see error messages
+
 ### "Failed to convert recipe"
 - Check that your API key is valid
 - Ensure you have credits in your Anthropic account
+- Verify the proxy server is running (for URL conversions)
 - Try a different recipe URL or image
 
 ### Image upload fails
@@ -181,6 +201,10 @@ The app doesn't just translate - it understands Swedish cooking culture:
 ### Recipe not found from URL
 - Some websites block automated access
 - Try taking a screenshot and using image upload instead
+
+### Input fields show white text (can't see what you type)
+- This has been fixed in the latest version
+- Pull the latest code or check `src/index.css` for input styling
 
 ## Future Enhancements (Phase 2)
 
