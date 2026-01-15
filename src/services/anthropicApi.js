@@ -140,7 +140,15 @@ Return ONLY valid JSON with the recipe data, no additional text.`,
       jsonText = jsonText.replace(/```\n?/g, '').replace(/```\n?$/g, '');
     }
 
-    const recipe = JSON.parse(jsonText);
+    let recipe;
+    try {
+      recipe = JSON.parse(jsonText);
+    } catch (parseError) {
+      console.error('Failed to parse Claude response as JSON:', parseError);
+      console.error('Raw response:', responseText);
+      console.error('Cleaned JSON text:', jsonText);
+      throw new Error('Claude returned invalid JSON. Please try again or use a different recipe.');
+    }
 
     // Add original URL if it was provided
     if (input.type === 'url') {
@@ -150,7 +158,15 @@ Return ONLY valid JSON with the recipe data, no additional text.`,
     return recipe;
   } catch (error) {
     console.error('Error converting recipe:', error);
-    throw new Error(`Failed to convert recipe: ${error.message}`);
+
+    // Provide more specific error messages
+    if (error.message?.includes('Failed to fetch')) {
+      throw new Error('Kunde inte hämta receptet. Kontrollera att proxy-servern körs på port 3001.');
+    } else if (error.message?.includes('API key')) {
+      throw new Error('Ogiltig API-nyckel. Kontrollera din Anthropic API-nyckel.');
+    }
+
+    throw new Error(`Misslyckades att konvertera recept: ${error.message}`);
   }
 }
 

@@ -4,8 +4,19 @@ import cors from 'cors';
 const app = express();
 const PORT = 3001;
 
-app.use(cors());
+// Enhanced CORS configuration
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:5173'],
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 app.use(express.json());
+
+// Logging middleware
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
 
 // Proxy endpoint to fetch recipe URLs and bypass CORS
 app.post('/api/fetch-recipe', async (req, res) => {
@@ -46,11 +57,29 @@ app.post('/api/fetch-recipe', async (req, res) => {
   }
 });
 
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Swedish Cooking Companion Proxy Server',
+    status: 'running',
+    endpoints: {
+      health: '/health',
+      fetchRecipe: 'POST /api/fetch-recipe'
+    }
+  });
+});
+
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok' });
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+// 404 handler
+app.use((req, res) => {
+  console.log(`404 - Route not found: ${req.method} ${req.path}`);
+  res.status(404).json({ error: 'Not Found', path: req.path });
 });
 
 app.listen(PORT, () => {
   console.log(`🚀 Proxy server running on http://localhost:${PORT}`);
-  console.log(`📡 Recipe fetch endpoint: http://localhost:${PORT}/api/fetch-recipe`);
+  console.log(`📡 Recipe fetch endpoint: POST http://localhost:${PORT}/api/fetch-recipe`);
+  console.log(`💚 Health check: GET http://localhost:${PORT}/health`);
 });
