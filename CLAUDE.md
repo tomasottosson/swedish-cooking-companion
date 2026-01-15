@@ -36,11 +36,15 @@ src/
 ## Development Commands
 
 ```bash
-npm install    # Install dependencies
-npm run dev    # Start dev server (http://localhost:3000)
-npm run build  # Production build
-npm run preview # Preview production build
+npm install       # Install dependencies
+npm run dev:all   # Start BOTH proxy server (3001) and dev server (3000) - RECOMMENDED
+npm run server    # Start proxy server only (port 3001)
+npm run dev       # Start dev server only (http://localhost:3000)
+npm run build     # Production build
+npm run preview   # Preview production build
 ```
+
+**IMPORTANT**: For URL recipe conversion to work, you MUST run the proxy server. Use `npm run dev:all` to start both servers at once.
 
 ## Key Patterns & Conventions
 
@@ -97,6 +101,16 @@ Swedish measurements:
 ### `src/services/anthropicApi.js`
 Contains the system prompt with all Swedification rules. This is the heart of the app. Modify here to improve recipe conversion quality.
 
+**Current model**: `claude-3-5-sonnet-20240620` (line 126)
+
+### `server.js`
+Express.js proxy server that bypasses CORS restrictions when fetching recipe URLs. Must be running for URL-based recipe conversion.
+
+**Endpoints**:
+- `POST /api/fetch-recipe` - Fetches HTML from recipe URLs
+- `GET /health` - Health check endpoint
+- `GET /` - Server info
+
 ### `src/utils/storage.js`
 localStorage wrapper with methods:
 - `getApiKey()` / `saveApiKey(key)`
@@ -105,13 +119,13 @@ localStorage wrapper with methods:
 
 ### `tailwind.config.js`
 Custom colors defined:
-- `swedish-blue` - Swedish flag blue
-- `swedish-yellow` - Swedish flag yellow
+- `swedish-blue` - Swedish flag blue (#006AA7)
+- `swedish-yellow` - Swedish flag yellow (#FECC00)
 
 ## Important Constraints
 
 - **Image size limit:** 5MB max for uploaded recipe images
-- **No backend:** All API calls made directly from browser
+- **Proxy server required:** URL conversion requires proxy server on port 3001
 - **Privacy-first:** No analytics, no external data storage
 - **User pays:** Users use their own API key and pay for usage
 
