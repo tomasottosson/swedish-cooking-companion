@@ -14,6 +14,7 @@ A web application that converts international recipes into Swedish-adapted versi
 - **Full Swedish Translation**: Complete recipe translation with proper cooking terminology
 - **Multiple Input Methods**:
   - Paste recipe URLs
+  - Paste recipe text directly (avoids token limits and blocked sites)
   - Upload recipe images/screenshots
 - **Recipe Storage**: Save and manage your converted recipes
 - **Export/Import**: Backup and restore your recipe collection
@@ -76,13 +77,20 @@ npm run dev
 **From URL:**
 1. Click the "URL" tab
 2. Paste a recipe URL (e.g., https://goop.com/recipes/thomas-keller-lemon-tart/)
-3. Click "Convert to Swedish Recipe"
+3. Click "Konvertera till svenskt recept"
 4. Wait for Claude to work its magic!
 
+**From Text (Recommended for long pages or blocked sites):**
+1. Click the "Text" tab
+2. Copy the recipe from any webpage (Ctrl+C/Cmd+C)
+3. Paste it into the text area (Ctrl+V/Cmd+V)
+4. Click "Konvertera till svenskt recept"
+5. Perfect for avoiding token limits and bot-blocked sites!
+
 **From Image:**
-1. Click the "Image" tab
+1. Click the "Bild" tab
 2. Upload a screenshot or photo of a recipe (max 5MB)
-3. Click "Convert to Swedish Recipe"
+3. Click "Konvertera till svenskt recept"
 4. The AI will extract and convert the recipe
 
 ### Managing Recipes
