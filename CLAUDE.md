@@ -10,9 +10,9 @@ A React web app that converts international recipes into Swedish-adapted version
 
 - **React 18** with Vite (fast dev server, HMR)
 - **Tailwind CSS** for styling
-- **Anthropic Claude API** (claude-3-5-sonnet) for recipe conversion
+- **Anthropic Claude API** (Claude Sonnet 4.5) for recipe conversion
 - **Browser localStorage** for persistence (API key + saved recipes)
-- No backend - runs entirely client-side
+- **Express.js proxy server** for CORS-free URL fetching
 
 ## Project Structure
 
@@ -101,7 +101,7 @@ Swedish measurements:
 ### `src/services/anthropicApi.js`
 Contains the system prompt with all Swedification rules. This is the heart of the app. Modify here to improve recipe conversion quality.
 
-**Current model**: `claude-3-5-sonnet-20240620` (line 126)
+**Current model**: `claude-sonnet-4-5-20250929` (line 126) - Claude Sonnet 4.5, the latest recommended model with enhanced intelligence and coding capabilities
 
 ### `server.js`
 Express.js proxy server that bypasses CORS restrictions when fetching recipe URLs. Must be running for URL-based recipe conversion.
