@@ -79,7 +79,18 @@ export async function convertRecipe(input, apiKey, onProgress) {
 
       if (!response.ok) {
         const error = await response.json();
-        throw new Error(error.error || 'Failed to fetch recipe URL');
+        const errorMessage = error.error || 'Failed to fetch recipe URL';
+
+        // Provide more specific error messages based on the error type
+        if (errorMessage.includes('Forbidden') || errorMessage.includes('403')) {
+          throw new Error('Webbplatsen blockerar automatisk åtkomst. Prova att ta en skärmdump av receptet och ladda upp som bild istället.');
+        } else if (errorMessage.includes('404') || errorMessage.includes('Not Found')) {
+          throw new Error('Receptet hittades inte på denna URL. Kontrollera att länken är korrekt.');
+        } else if (errorMessage.includes('timeout') || errorMessage.includes('ETIMEDOUT')) {
+          throw new Error('Anslutningen tog för lång tid. Kontrollera din internetanslutning och försök igen.');
+        }
+
+        throw new Error(errorMessage);
       }
 
       const { html } = await response.json();

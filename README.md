@@ -198,9 +198,12 @@ The app doesn't just translate - it understands Swedish cooking culture:
 - Use common formats (JPG, PNG, WebP)
 - Make sure the recipe text is clearly visible
 
-### Recipe not found from URL
-- Some websites block automated access
-- Try taking a screenshot and using image upload instead
+### Recipe not found from URL or "Webbplatsen blockerar automatisk åtkomst"
+- **Some websites actively block bots and automated access** (e.g., goop.com, many recipe sites with Cloudflare protection)
+- These sites return 403 Forbidden errors even with proper headers
+- **Workaround**: Take a screenshot of the recipe page and use the image upload feature instead
+- Sites that typically work: The Guardian, AllRecipes, BBC Good Food, many blogs
+- Sites that often block: High-traffic commercial sites with anti-bot protection
 
 ### Input fields show white text (can't see what you type)
 - This has been fixed in the latest version
