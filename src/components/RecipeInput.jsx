@@ -8,9 +8,54 @@ export default function RecipeInput({ onConvert, isLoading }) {
   const [imagePreview, setImagePreview] = useState(null);
   const [recipeText, setRecipeText] = useState('');
   const [error, setError] = useState('');
+  const [isDragging, setIsDragging] = useState(false);
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
+    if (!file) return;
+
+    setError('');
+
+    if (file.size > 5 * 1024 * 1024) {
+      setError('Image must be smaller than 5MB');
+      return;
+    }
+
+    if (!file.type.startsWith('image/')) {
+      setError('Please select an image file');
+      return;
+    }
+
+    setImageFile(file);
+
+    // Create preview
+    const reader = new FileReader();
+    reader.onload = (e) => setImagePreview(e.target.result);
+    reader.readAsDataURL(file);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!isLoading) {
+      setIsDragging(true);
+    }
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+
+    if (isLoading) return;
+
+    const file = e.dataTransfer.files[0];
     if (!file) return;
 
     setError('');
@@ -177,7 +222,14 @@ export default function RecipeInput({ onConvert, isLoading }) {
             />
             <label
               htmlFor="image"
-              className="block w-full border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-swedish-blue transition-colors"
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+              className={`block w-full border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
+                isDragging
+                  ? 'border-swedish-blue bg-blue-50'
+                  : 'border-gray-300 hover:border-swedish-blue'
+              }`}
             >
               {imagePreview ? (
                 <div className="space-y-2">
@@ -200,7 +252,9 @@ export default function RecipeInput({ onConvert, isLoading }) {
               ) : (
                 <div>
                   <div className="text-4xl mb-2">📷</div>
-                  <p className="text-gray-600">Klicka för att ladda upp en bild</p>
+                  <p className="text-gray-600">
+                    {isDragging ? 'Släpp bilden här' : 'Klicka eller dra en bild hit'}
+                  </p>
                   <p className="text-xs text-gray-500 mt-1">Max storlek: 5MB</p>
                 </div>
               )}
