@@ -203,6 +203,18 @@ Return ONLY valid JSON with the recipe data, no additional text.`,
           },
         ],
       };
+    } else if (input.type === 'text') {
+      onProgress?.('Processing recipe text...');
+
+      userMessage = {
+        role: 'user',
+        content: `Here is a recipe that needs to be converted to a Swedish-adapted version following the instructions.
+
+Recipe Text:
+${input.text}
+
+Return ONLY valid JSON with the recipe data, no additional text.`,
+      };
     } else {
       throw new Error('Invalid input type');
     }

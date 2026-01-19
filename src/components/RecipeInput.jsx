@@ -6,6 +6,7 @@ export default function RecipeInput({ onConvert, isLoading }) {
   const [url, setUrl] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [recipeText, setRecipeText] = useState('');
   const [error, setError] = useState('');
 
   const handleImageChange = async (e) => {
@@ -39,7 +40,7 @@ export default function RecipeInput({ onConvert, isLoading }) {
     try {
       if (inputType === 'url') {
         if (!url.trim()) {
-          setError('Please enter a URL');
+          setError('Vänligen ange en URL');
           return;
         }
 
@@ -47,19 +48,31 @@ export default function RecipeInput({ onConvert, isLoading }) {
         try {
           new URL(url);
         } catch {
-          setError('Please enter a valid URL');
+          setError('Vänligen ange en giltig URL');
           return;
         }
 
         onConvert({ type: 'url', url: url.trim() });
-      } else {
+      } else if (inputType === 'image') {
         if (!imageFile) {
-          setError('Please select an image');
+          setError('Vänligen välj en bild');
           return;
         }
 
         const base64Data = await imageToBase64(imageFile);
         onConvert({ type: 'image', imageData: base64Data });
+      } else if (inputType === 'text') {
+        if (!recipeText.trim()) {
+          setError('Vänligen klistra in recepttext');
+          return;
+        }
+
+        if (recipeText.trim().length < 50) {
+          setError('Recepttexten är för kort. Klistra in hela receptet.');
+          return;
+        }
+
+        onConvert({ type: 'text', text: recipeText.trim() });
       }
     } catch (err) {
       setError(err.message);
@@ -76,11 +89,11 @@ export default function RecipeInput({ onConvert, isLoading }) {
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Konvertera recept</h2>
 
       {/* Input Type Selector */}
-      <div className="flex gap-4 mb-6">
+      <div className="grid grid-cols-3 gap-3 mb-6">
         <button
           type="button"
           onClick={() => setInputType('url')}
-          className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors ${
+          className={`py-3 px-4 rounded-lg font-medium transition-colors ${
             inputType === 'url'
               ? 'bg-swedish-blue text-white'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -90,8 +103,19 @@ export default function RecipeInput({ onConvert, isLoading }) {
         </button>
         <button
           type="button"
+          onClick={() => setInputType('text')}
+          className={`py-3 px-4 rounded-lg font-medium transition-colors ${
+            inputType === 'text'
+              ? 'bg-swedish-blue text-white'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          }`}
+        >
+          📝 Text
+        </button>
+        <button
+          type="button"
           onClick={() => setInputType('image')}
-          className={`flex-1 py-3 px-4 rounded-lg font-medium transition-colors ${
+          className={`py-3 px-4 rounded-lg font-medium transition-colors ${
             inputType === 'image'
               ? 'bg-swedish-blue text-white'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -119,6 +143,23 @@ export default function RecipeInput({ onConvert, isLoading }) {
             />
             <p className="text-xs text-gray-500 mt-1">
               Exempel: https://goop.com/recipes/thomas-keller-lemon-tart/
+            </p>
+          </div>
+        ) : inputType === 'text' ? (
+          <div>
+            <label htmlFor="recipeText" className="block text-sm font-medium text-gray-700 mb-2">
+              Recepttext
+            </label>
+            <textarea
+              id="recipeText"
+              value={recipeText}
+              onChange={(e) => setRecipeText(e.target.value)}
+              placeholder="Klistra in receptet här... Inkludera titel, ingredienser och instruktioner."
+              className="input-field min-h-[300px] resize-y font-mono text-sm"
+              disabled={isLoading}
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              Tips: Kopiera recepttexten från webbsidan (Ctrl+C) och klistra in här. Detta undviker problem med långa webbsidor och blockerade sajter.
             </p>
           </div>
         ) : (
@@ -175,7 +216,11 @@ export default function RecipeInput({ onConvert, isLoading }) {
 
         <button
           type="submit"
-          disabled={isLoading || (inputType === 'url' ? !url.trim() : !imageFile)}
+          disabled={isLoading || (
+            inputType === 'url' ? !url.trim() :
+            inputType === 'text' ? !recipeText.trim() :
+            !imageFile
+          )}
           className="btn-primary w-full"
         >
           {isLoading ? (
