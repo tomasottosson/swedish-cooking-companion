@@ -130,59 +130,51 @@ export default function RecipeInput({ onConvert, isLoading }) {
   };
 
   return (
-    <div className="card animate-slide-up">
-      <div className="flex items-center gap-3 mb-8">
-        <div className="w-2 h-12 bg-gradient-to-b from-saffron-500 to-terracotta-500 rounded-full"></div>
-        <h2 className="text-4xl font-display font-bold text-charcoal-900">
-          Konvertera recept
-        </h2>
-      </div>
+    <div className="card">
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">Konvertera recept</h2>
 
       {/* Input Type Selector */}
-      <div className="grid grid-cols-3 gap-4 mb-8 p-1.5 bg-cream-100 rounded-3xl">
+      <div className="grid grid-cols-3 gap-3 mb-6">
         <button
           type="button"
           onClick={() => setInputType('url')}
-          className={`py-4 px-6 rounded-2xl font-semibold transition-all duration-300 transform ${
+          className={`py-3 px-4 rounded-lg font-medium transition-colors ${
             inputType === 'url'
-              ? 'bg-gradient-to-r from-saffron-500 to-terracotta-500 text-white shadow-lg scale-105'
-              : 'bg-transparent text-charcoal-600 hover:bg-white/50'
+              ? 'bg-swedish-blue text-white'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
-          <span className="text-2xl block mb-1">📎</span>
-          <span className="text-sm">URL</span>
+          📎 URL
         </button>
         <button
           type="button"
           onClick={() => setInputType('text')}
-          className={`py-4 px-6 rounded-2xl font-semibold transition-all duration-300 transform ${
+          className={`py-3 px-4 rounded-lg font-medium transition-colors ${
             inputType === 'text'
-              ? 'bg-gradient-to-r from-saffron-500 to-terracotta-500 text-white shadow-lg scale-105'
-              : 'bg-transparent text-charcoal-600 hover:bg-white/50'
+              ? 'bg-swedish-blue text-white'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
-          <span className="text-2xl block mb-1">📝</span>
-          <span className="text-sm">Text</span>
+          📝 Text
         </button>
         <button
           type="button"
           onClick={() => setInputType('image')}
-          className={`py-4 px-6 rounded-2xl font-semibold transition-all duration-300 transform ${
+          className={`py-3 px-4 rounded-lg font-medium transition-colors ${
             inputType === 'image'
-              ? 'bg-gradient-to-r from-saffron-500 to-terracotta-500 text-white shadow-lg scale-105'
-              : 'bg-transparent text-charcoal-600 hover:bg-white/50'
+              ? 'bg-swedish-blue text-white'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
         >
-          <span className="text-2xl block mb-1">📷</span>
-          <span className="text-sm">Bild</span>
+          📷 Bild
         </button>
       </div>
 
       {/* Input Form */}
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-4">
         {inputType === 'url' ? (
           <div>
-            <label htmlFor="url" className="block text-base font-semibold text-charcoal-700 mb-3">
+            <label htmlFor="url" className="block text-sm font-medium text-gray-700 mb-2">
               Recept-URL
             </label>
             <input
@@ -194,14 +186,13 @@ export default function RecipeInput({ onConvert, isLoading }) {
               className="input-field"
               disabled={isLoading}
             />
-            <p className="text-sm text-sage-600 mt-2 flex items-center gap-2">
-              <span className="inline-block w-1.5 h-1.5 bg-sage-400 rounded-full"></span>
+            <p className="text-xs text-gray-500 mt-1">
               Exempel: https://goop.com/recipes/thomas-keller-lemon-tart/
             </p>
           </div>
         ) : inputType === 'text' ? (
           <div>
-            <label htmlFor="recipeText" className="block text-base font-semibold text-charcoal-700 mb-3">
+            <label htmlFor="recipeText" className="block text-sm font-medium text-gray-700 mb-2">
               Recepttext
             </label>
             <textarea
@@ -212,14 +203,13 @@ export default function RecipeInput({ onConvert, isLoading }) {
               className="input-field min-h-[300px] resize-y font-mono text-sm"
               disabled={isLoading}
             />
-            <p className="text-sm text-sage-600 mt-2 flex items-center gap-2">
-              <span className="inline-block w-1.5 h-1.5 bg-sage-400 rounded-full"></span>
-              Tips: Kopiera recepttexten från webbsidan (Ctrl+C) och klistra in här
+            <p className="text-xs text-gray-500 mt-1">
+              Tips: Kopiera recepttexten från webbsidan (Ctrl+C) och klistra in här. Detta undviker problem med långa webbsidor och blockerade sajter.
             </p>
           </div>
         ) : (
           <div>
-            <label htmlFor="image" className="block text-base font-semibold text-charcoal-700 mb-3">
+            <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-2">
               Receptbild
             </label>
             <input
@@ -235,18 +225,18 @@ export default function RecipeInput({ onConvert, isLoading }) {
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
-              className={`block w-full border-3 border-dashed rounded-3xl p-12 text-center cursor-pointer transition-all duration-300 ${
+              className={`block w-full border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
                 isDragging
-                  ? 'border-saffron-500 bg-saffron-50 scale-105 shadow-xl'
-                  : 'border-cream-300 hover:border-sage-400 hover:bg-cream-50'
+                  ? 'border-swedish-blue bg-blue-50'
+                  : 'border-gray-300 hover:border-swedish-blue'
               }`}
             >
               {imagePreview ? (
-                <div className="space-y-4">
+                <div className="space-y-2">
                   <img
                     src={imagePreview}
                     alt="Recipe preview"
-                    className="max-h-80 mx-auto rounded-2xl shadow-lg"
+                    className="max-h-64 mx-auto rounded"
                   />
                   <button
                     type="button"
@@ -254,21 +244,18 @@ export default function RecipeInput({ onConvert, isLoading }) {
                       e.preventDefault();
                       clearImage();
                     }}
-                    className="inline-flex items-center gap-2 px-6 py-2 bg-terracotta-100 text-terracotta-700 rounded-full font-medium hover:bg-terracotta-200 transition-colors"
+                    className="text-sm text-red-600 hover:text-red-700"
                   >
-                    <span>✕</span> Ta bort bild
+                    Ta bort bild
                   </button>
                 </div>
               ) : (
-                <div className="space-y-3">
-                  <div className="text-6xl mb-4 animate-float">📷</div>
-                  <p className="text-xl font-semibold text-charcoal-700">
-                    {isDragging ? 'Släpp bilden här!' : 'Klicka eller dra en bild hit'}
+                <div>
+                  <div className="text-4xl mb-2">📷</div>
+                  <p className="text-gray-600">
+                    {isDragging ? 'Släpp bilden här' : 'Klicka eller dra en bild hit'}
                   </p>
-                  <p className="text-sm text-sage-600 flex items-center justify-center gap-2">
-                    <span className="inline-block w-1.5 h-1.5 bg-sage-400 rounded-full"></span>
-                    Max storlek: 5MB
-                  </p>
+                  <p className="text-xs text-gray-500 mt-1">Max storlek: 5MB</p>
                 </div>
               )}
             </label>
@@ -276,9 +263,8 @@ export default function RecipeInput({ onConvert, isLoading }) {
         )}
 
         {error && (
-          <div className="bg-terracotta-50 border-2 border-terracotta-300 text-terracotta-800 px-6 py-4 rounded-2xl flex items-start gap-3 animate-slide-up">
-            <span className="text-2xl">⚠️</span>
-            <p className="font-medium flex-1">{error}</p>
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
+            {error}
           </div>
         )}
 
@@ -289,11 +275,11 @@ export default function RecipeInput({ onConvert, isLoading }) {
             inputType === 'text' ? !recipeText.trim() :
             !imageFile
           )}
-          className="btn-primary w-full text-lg"
+          className="btn-primary w-full"
         >
           {isLoading ? (
-            <span className="flex items-center justify-center gap-3">
-              <svg className="animate-spin h-6 w-6" viewBox="0 0 24 24">
+            <span className="flex items-center justify-center gap-2">
+              <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
                 <circle
                   className="opacity-25"
                   cx="12"
@@ -309,13 +295,10 @@ export default function RecipeInput({ onConvert, isLoading }) {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 />
               </svg>
-              <span className="font-display">Konverterar recept...</span>
+              Konverterar...
             </span>
           ) : (
-            <span className="flex items-center justify-center gap-2">
-              <span className="text-2xl">✨</span>
-              <span className="font-display">Konvertera till svenskt recept</span>
-            </span>
+            'Konvertera till svenskt recept'
           )}
         </button>
       </form>
