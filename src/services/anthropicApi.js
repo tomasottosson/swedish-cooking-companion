@@ -128,10 +128,27 @@ Before returning the recipe, verify:
 
 Remember: You're helping Swedish home cooks recreate international recipes with ingredients and language that feel familiar and accessible. Write for them, not for a translation engine.`;
 
-export async function convertRecipe(input, apiKey, onProgress) {
+// Model options for recipe conversion
+export const MODELS = {
+  fast: {
+    id: 'claude-haiku-4-5-20251001',
+    name: 'Snabb (Haiku)',
+    description: 'Snabbare konvertering, lägre kostnad',
+  },
+  quality: {
+    id: 'claude-sonnet-4-5-20250929',
+    name: 'Kvalitet (Sonnet)',
+    description: 'Bästa kvalitet, längre väntetid',
+  },
+};
+
+export async function convertRecipe(input, apiKey, onProgress, options = {}) {
   if (!apiKey) {
     throw new Error('API key is required');
   }
+
+  const modelKey = options.useQuickMode ? 'fast' : 'quality';
+  const model = MODELS[modelKey].id;
 
   const anthropic = new Anthropic({
     apiKey: apiKey,
@@ -219,10 +236,10 @@ Return ONLY valid JSON with the recipe data, no additional text.`,
       throw new Error('Invalid input type');
     }
 
-    onProgress?.('Converting recipe with Claude AI...');
+    onProgress?.(`Converting recipe with ${MODELS[modelKey].name}...`);
 
     const message = await anthropic.messages.create({
-      model: 'claude-sonnet-4-5-20250929',
+      model,
       max_tokens: 4096,
       system: SYSTEM_PROMPT,
       messages: [userMessage],

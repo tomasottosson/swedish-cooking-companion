@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { imageToBase64 } from '../services/anthropicApi';
+import { imageToBase64, MODELS } from '../services/anthropicApi';
 
 export default function RecipeInput({ onConvert, isLoading }) {
   const [inputType, setInputType] = useState('url');
@@ -9,6 +9,7 @@ export default function RecipeInput({ onConvert, isLoading }) {
   const [recipeText, setRecipeText] = useState('');
   const [error, setError] = useState('');
   const [isDragging, setIsDragging] = useState(false);
+  const [useQuickMode, setUseQuickMode] = useState(true);
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -97,7 +98,7 @@ export default function RecipeInput({ onConvert, isLoading }) {
           return;
         }
 
-        onConvert({ type: 'url', url: url.trim() });
+        onConvert({ type: 'url', url: url.trim() }, { useQuickMode });
       } else if (inputType === 'image') {
         if (!imageFile) {
           setError('Vänligen välj en bild');
@@ -105,7 +106,7 @@ export default function RecipeInput({ onConvert, isLoading }) {
         }
 
         const base64Data = await imageToBase64(imageFile);
-        onConvert({ type: 'image', imageData: base64Data });
+        onConvert({ type: 'image', imageData: base64Data }, { useQuickMode });
       } else if (inputType === 'text') {
         if (!recipeText.trim()) {
           setError('Vänligen klistra in recepttext');
@@ -117,7 +118,7 @@ export default function RecipeInput({ onConvert, isLoading }) {
           return;
         }
 
-        onConvert({ type: 'text', text: recipeText.trim() });
+        onConvert({ type: 'text', text: recipeText.trim() }, { useQuickMode });
       }
     } catch (err) {
       setError(err.message);
@@ -267,6 +268,34 @@ export default function RecipeInput({ onConvert, isLoading }) {
             {error}
           </div>
         )}
+
+        {/* Speed Mode Toggle */}
+        <div className="bg-gray-50 rounded-lg p-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <span className="font-medium text-gray-800">
+                {useQuickMode ? MODELS.fast.name : MODELS.quality.name}
+              </span>
+              <p className="text-xs text-gray-500 mt-0.5">
+                {useQuickMode ? MODELS.fast.description : MODELS.quality.description}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setUseQuickMode(!useQuickMode)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                useQuickMode ? 'bg-swedish-blue' : 'bg-gray-300'
+              }`}
+              disabled={isLoading}
+            >
+              <span
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                  useQuickMode ? 'translate-x-6' : 'translate-x-1'
+                }`}
+              />
+            </button>
+          </div>
+        </div>
 
         <button
           type="submit"

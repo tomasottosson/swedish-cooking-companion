@@ -37,7 +37,7 @@ function App() {
     setCurrentView('input');
   };
 
-  const handleConvert = async (input) => {
+  const handleConvert = async (input, options = {}) => {
     setIsLoading(true);
     setError(null);
     setProgressMessage('Starting conversion...');
@@ -45,7 +45,7 @@ function App() {
     try {
       const recipe = await convertRecipe(input, apiKey, (message) => {
         setProgressMessage(message);
-      });
+      }, options);
 
       setConvertedRecipe(recipe);
       setCurrentView('display');
