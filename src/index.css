@@ -20,7 +20,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: #F5F0E8;
-  color: #4A4035;
+  color: #3D3429; /* Improved contrast for WCAG AA compliance */
 }
 
 #root {
@@ -165,14 +165,14 @@ input[type="password"],
 input[type="search"],
 input[type="file"],
 textarea {
-  color: #4A4035 !important;
+  color: #3D3429 !important; /* Improved contrast */
   background-color: white !important;
 }
 
-/* Placeholder styling */
+/* Placeholder styling - improved contrast for WCAG AA */
 input::placeholder,
 textarea::placeholder {
-  color: #8A7B6B !important;
+  color: #6B5E50 !important; /* Darker for 4.5:1 contrast ratio */
 }
 
 /* Custom scrollbar */
@@ -214,6 +214,26 @@ textarea::placeholder {
   animation: pulse-soft 3s ease-in-out infinite;
 }
 
+/* Respect user's motion preferences (WCAG 2.1 Level AA) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-float,
+  .animate-pulse-soft,
+  .animate-spin,
+  .animate-bounce,
+  .animate-pulse {
+    animation: none !important;
+  }
+}
+
 /* Pattern background */
 .pattern-dots {
   background-image: radial-gradient(#1B4D3E 1px, transparent 1px);
@@ -227,4 +247,23 @@ textarea::placeholder {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Enhanced focus styles for accessibility (WCAG 2.1 Level AA) */
+:focus-visible {
+  outline: 3px solid #1B4D3E;
+  outline-offset: 2px;
+}
+
+/* Skip link visible on focus */
+.sr-only:focus-within,
+a.sr-only:focus {
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: nowrap;
 }

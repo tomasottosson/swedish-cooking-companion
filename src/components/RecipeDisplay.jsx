@@ -43,10 +43,10 @@ export default function RecipeDisplay({ recipe, onSave, onClose }) {
   };
 
   return (
-    <div className="card max-w-4xl mx-auto relative overflow-hidden">
+    <article className="card max-w-4xl mx-auto relative overflow-hidden" aria-labelledby="recipe-title">
       {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-40 h-40 bg-warm-yellow/10 rounded-full -translate-y-1/2 translate-x-1/2"></div>
-      <div className="absolute bottom-0 left-0 w-32 h-32 bg-coral/10 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+      <div className="absolute top-0 right-0 w-40 h-40 bg-warm-yellow/10 rounded-full -translate-y-1/2 translate-x-1/2" aria-hidden="true"></div>
+      <div className="absolute bottom-0 left-0 w-32 h-32 bg-coral/10 rounded-full translate-y-1/2 -translate-x-1/2" aria-hidden="true"></div>
 
       <div className="relative">
         {/* Header */}
@@ -55,7 +55,7 @@ export default function RecipeDisplay({ recipe, onSave, onClose }) {
             <div className="flex items-center gap-3 mb-3">
               <span className="pill-yellow">Svenskt recept</span>
             </div>
-            <h1 className="text-4xl font-display font-bold text-forest mb-2">{recipe.title}</h1>
+            <h1 id="recipe-title" className="text-4xl font-display font-bold text-forest mb-2">{recipe.title}</h1>
             {recipe.originalTitle && recipe.originalTitle !== recipe.title && (
               <p className="text-warm-gray italic">Original: {recipe.originalTitle}</p>
             )}
@@ -63,45 +63,49 @@ export default function RecipeDisplay({ recipe, onSave, onClose }) {
           <button
             onClick={onClose}
             className="w-10 h-10 rounded-full bg-cream hover:bg-cream-dark flex items-center justify-center transition-colors text-warm-gray hover:text-forest"
-            title="Stäng"
+            aria-label="Stäng recept"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
 
         {/* Recipe Meta Info - Card style */}
-        <div className="flex flex-wrap gap-3 mb-8">
+        <dl className="flex flex-wrap gap-3 mb-8">
           {recipe.servings && (
             <div className="flex items-center gap-2 bg-cream rounded-full px-4 py-2">
-              <span className="text-lg">🍽️</span>
-              <span className="text-forest font-medium">{recipe.servings}</span>
+              <span className="text-lg" aria-hidden="true">🍽️</span>
+              <dt className="sr-only">Portioner</dt>
+              <dd className="text-forest font-medium">{recipe.servings}</dd>
             </div>
           )}
           {recipe.prepTime && (
             <div className="flex items-center gap-2 bg-cream rounded-full px-4 py-2">
-              <span className="text-lg">⏱️</span>
-              <span className="text-forest font-medium">{recipe.prepTime}</span>
+              <span className="text-lg" aria-hidden="true">⏱️</span>
+              <dt className="sr-only">Förberedelsetid</dt>
+              <dd className="text-forest font-medium">{recipe.prepTime}</dd>
             </div>
           )}
           {recipe.cookTime && (
             <div className="flex items-center gap-2 bg-cream rounded-full px-4 py-2">
-              <span className="text-lg">🔥</span>
-              <span className="text-forest font-medium">{recipe.cookTime}</span>
+              <span className="text-lg" aria-hidden="true">🔥</span>
+              <dt className="sr-only">Tillagningstid</dt>
+              <dd className="text-forest font-medium">{recipe.cookTime}</dd>
             </div>
           )}
-        </div>
+        </dl>
 
         {recipe.originalUrl && (
           <div className="mb-8 p-4 bg-cream rounded-2xl flex items-center gap-3">
-            <span className="text-warm-gray">🔗</span>
+            <span className="text-warm-gray" aria-hidden="true">🔗</span>
             <span className="text-sm text-warm-gray">Originalkälla: </span>
             <a
               href={recipe.originalUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-forest hover:text-forest-light underline underline-offset-2"
+              aria-label={`Originalrecept (öppnas i ny flik): ${recipe.originalUrl}`}
             >
               {recipe.originalUrl.length > 50 ? recipe.originalUrl.substring(0, 50) + '...' : recipe.originalUrl}
             </a>
@@ -110,70 +114,70 @@ export default function RecipeDisplay({ recipe, onSave, onClose }) {
 
         <div className="grid md:grid-cols-2 gap-8 mb-8">
           {/* Ingredients */}
-          <div className="bg-warm-yellow/30 rounded-3xl p-6">
+          <section className="bg-warm-yellow/30 rounded-3xl p-6" aria-labelledby="ingredients-heading">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 bg-warm-yellow rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-warm-yellow rounded-xl flex items-center justify-center" aria-hidden="true">
                 <span className="text-xl">🥕</span>
               </div>
-              <h2 className="text-2xl font-display font-bold text-forest">
+              <h2 id="ingredients-heading" className="text-2xl font-display font-bold text-forest">
                 Ingredienser
               </h2>
             </div>
-            <ul className="space-y-3">
+            <ul className="space-y-3" aria-label="Lista med ingredienser">
               {recipe.ingredients?.map((ingredient, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  <span className="w-2 h-2 bg-forest rounded-full mt-2 flex-shrink-0"></span>
+                  <span className="w-2 h-2 bg-forest rounded-full mt-2 flex-shrink-0" aria-hidden="true"></span>
                   <span className="text-warm-gray-dark break-words">{parseMarkdown(ingredient)}</span>
                 </li>
               ))}
             </ul>
-          </div>
+          </section>
 
           {/* Instructions */}
-          <div className="bg-forest/5 rounded-3xl p-6">
+          <section className="bg-forest/5 rounded-3xl p-6" aria-labelledby="instructions-heading">
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 bg-forest rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-forest rounded-xl flex items-center justify-center" aria-hidden="true">
                 <span className="text-xl">👨‍🍳</span>
               </div>
-              <h2 className="text-2xl font-display font-bold text-forest">
+              <h2 id="instructions-heading" className="text-2xl font-display font-bold text-forest">
                 Instruktioner
               </h2>
             </div>
-            <ol className="space-y-4">
+            <ol className="space-y-4" aria-label="Steg-för-steg instruktioner">
               {recipe.instructions?.map((instruction, index) => (
                 <li key={index} className="flex gap-4">
-                  <span className="flex-shrink-0 w-8 h-8 bg-forest text-cream rounded-full flex items-center justify-center text-sm font-bold">
+                  <span className="flex-shrink-0 w-8 h-8 bg-forest text-cream rounded-full flex items-center justify-center text-sm font-bold" aria-hidden="true">
                     {index + 1}
                   </span>
                   <span className="text-warm-gray-dark flex-1 pt-1 break-words whitespace-normal">{parseMarkdown(instruction)}</span>
                 </li>
               ))}
             </ol>
-          </div>
+          </section>
         </div>
 
         {/* Swedish Adaptation Notes */}
         {recipe.notes && recipe.notes.length > 0 && (
-          <div className="mb-8">
+          <section className="mb-8" aria-labelledby="notes-heading">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-coral rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-coral rounded-xl flex items-center justify-center" aria-hidden="true">
                 <span className="text-xl">💡</span>
               </div>
-              <h2 className="text-2xl font-display font-bold text-forest">
+              <h2 id="notes-heading" className="text-2xl font-display font-bold text-forest">
                 Svenska anpassningar
               </h2>
             </div>
             <div className="bg-coral/10 border-2 border-coral/20 rounded-2xl p-5">
-              <ul className="space-y-3">
+              <ul className="space-y-3" aria-label="Tips om svenska anpassningar">
                 {recipe.notes.map((note, index) => (
                   <li key={index} className="flex items-start gap-3 text-warm-gray-dark">
-                    <span className="text-coral mt-0.5">→</span>
+                    <span className="text-coral mt-0.5" aria-hidden="true">→</span>
                     <span>{parseMarkdown(note)}</span>
                   </li>
                 ))}
               </ul>
             </div>
-          </div>
+          </section>
         )}
 
         {/* Action Buttons */}
@@ -182,10 +186,12 @@ export default function RecipeDisplay({ recipe, onSave, onClose }) {
             onClick={handleSave}
             disabled={isSaving}
             className={`flex-1 ${saveSuccess ? 'bg-forest text-cream' : 'btn-primary'} rounded-full py-4 font-semibold transition-all`}
+            aria-busy={isSaving}
+            aria-live="polite"
           >
             {isSaving ? (
               <span className="flex items-center justify-center gap-2">
-                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                 </svg>
@@ -193,14 +199,14 @@ export default function RecipeDisplay({ recipe, onSave, onClose }) {
               </span>
             ) : saveSuccess ? (
               <span className="flex items-center justify-center gap-2">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
                 Sparat!
               </span>
             ) : (
               <span className="flex items-center justify-center gap-2">
-                <span>💾</span>
+                <span aria-hidden="true">💾</span>
                 Spara recept
               </span>
             )}
@@ -215,12 +221,13 @@ export default function RecipeDisplay({ recipe, onSave, onClose }) {
               navigator.clipboard.writeText(recipeText);
             }}
             className="btn-secondary px-8"
+            aria-label="Kopiera recept till urklipp"
           >
-            <span>📋</span>
+            <span aria-hidden="true">📋</span>
             <span>Kopiera</span>
           </button>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
