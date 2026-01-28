@@ -274,7 +274,7 @@ COMMON TEMPERATURES:
 
 | Awkward | Natural Swedish |
 |---------|-----------------|
-| "Sauté the onions until translucent" | "Fräs löken tills den blir mjuk och glasig" |
+| "Sauté the onions until translucent" | "Fräs löken tills den blir mjuk och glansig" |
 | "Brown the meat on all sides" | "Bryn köttet på alla sidor" |
 | "Bring to a boil, then reduce heat" | "Koka upp och sänk sedan värmen" |
 | "Simmer for 30 minutes" | "Låt sjuda i 30 minuter" |
