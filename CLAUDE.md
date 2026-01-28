@@ -10,7 +10,9 @@ A React web app that converts international recipes into Swedish-adapted version
 
 - **React 18** with Vite (fast dev server, HMR)
 - **Tailwind CSS** for styling
-- **Anthropic Claude API** (Claude Sonnet 4.5) for recipe conversion
+- **Anthropic Claude API** with dual model support:
+  - Claude Haiku 4.5 (fast mode) - quicker conversions, lower cost
+  - Claude Sonnet 4.5 (quality mode) - best results
 - **Browser localStorage** for persistence (API key + saved recipes)
 - **Express.js proxy server** for CORS-free URL fetching
 
@@ -19,10 +21,10 @@ A React web app that converts international recipes into Swedish-adapted version
 ```
 src/
 ├── components/
-│   ├── ApiKeySetup.jsx     # API key input/management
+│   ├── ApiKeySetup.jsx     # API key input/management with focus trap
 │   ├── Header.jsx          # App header with Swedish branding
-│   ├── RecipeInput.jsx     # URL or image input form
-│   ├── RecipeDisplay.jsx   # Formatted recipe output
+│   ├── RecipeInput.jsx     # URL, text, or image input with speed mode toggle
+│   ├── RecipeDisplay.jsx   # Formatted recipe output with copy/save
 │   └── SavedRecipes.jsx    # Recipe library with search/export
 ├── services/
 │   └── anthropicApi.js     # Claude API integration + prompts
@@ -30,7 +32,7 @@ src/
 │   └── storage.js          # localStorage wrapper
 ├── App.jsx                 # Main app with routing state
 ├── main.jsx               # React entry point
-└── index.css              # Tailwind + custom styles
+└── index.css              # Tailwind + custom styles + accessibility
 ```
 
 ## Development Commands
@@ -64,6 +66,8 @@ npm run preview   # Preview production build
 - API key stored in localStorage
 - `dangerouslyAllowBrowser: true` flag used (client-side calls)
 - Structured JSON output from Claude for recipe parsing
+- Speed mode toggle: Haiku (fast) vs Sonnet (quality)
+- Three input types: URL, pasted text, and image upload
 
 ### Recipe Data Structure
 ```javascript
@@ -101,7 +105,14 @@ Swedish measurements:
 ### `src/services/anthropicApi.js`
 Contains the system prompt with all Swedification rules. This is the heart of the app. Modify here to improve recipe conversion quality.
 
-**Current model**: `claude-sonnet-4-5-20250929` (line 126) - Claude Sonnet 4.5, the latest recommended model with enhanced intelligence and coding capabilities
+**Models** (defined at lines 132-143):
+- Fast mode: `claude-haiku-4-5-20251001` - Claude Haiku 4.5, faster and lower cost
+- Quality mode: `claude-sonnet-4-5-20250929` - Claude Sonnet 4.5, best quality results
+
+**Exports**:
+- `MODELS` - Object with model configurations
+- `convertRecipe(input, apiKey, onProgress, options)` - Main conversion function
+- `imageToBase64(file)` - Helper for image uploads (5MB limit)
 
 ### `server.js`
 Express.js proxy server that bypasses CORS restrictions when fetching recipe URLs. Must be running for URL-based recipe conversion.
@@ -113,27 +124,57 @@ Express.js proxy server that bypasses CORS restrictions when fetching recipe URL
 
 ### `src/utils/storage.js`
 localStorage wrapper with methods:
-- `getApiKey()` / `saveApiKey(key)`
-- `getRecipes()` / `saveRecipe(recipe)` / `deleteRecipe(id)`
-- `exportRecipes()` / `importRecipes(json)`
+
+**API Key**:
+- `getApiKey()` / `saveApiKey(key)` / `clearApiKey()`
+
+**Recipe CRUD**:
+- `getRecipes()` / `getRecipeById(id)` / `saveRecipe(recipe)`
+- `updateRecipe(id, updates)` / `deleteRecipe(id)` / `clearAllRecipes()`
+- `searchRecipes(query)` - searches title, ingredients, instructions, notes
+
+**Import/Export**:
+- `exportRecipes()` - downloads JSON file
+- `importRecipes(json)` - merges imported recipes with existing
 
 ### `tailwind.config.js`
-Custom colors defined (WCAG AA compliant):
-- `cream` - Background (#F5F0E8)
-- `forest` - Primary green (#1B4D3E)
-- `warm-yellow` - Accent (#F7D547)
-- `coral` - Secondary accent (#C4693F)
-- `warm-gray` - Body text (#5A4D40) - 4.5:1 contrast on cream
-- `swedish-blue` - Swedish flag blue (#006AA7)
-- `swedish-yellow` - Swedish flag yellow (#FECC00)
+Custom colors defined (all WCAG AA compliant):
+
+**Primary palette**:
+- `cream` (#F5F0E8) / `cream-dark` (#E8E0D0) - backgrounds
+- `warm-yellow` (#F7D547) / `warm-yellow-light` / `warm-yellow-dark` - primary accent
+- `forest` (#1B4D3E) / `forest-light` / `forest-dark` - primary green
+
+**Secondary palette**:
+- `coral` (#C4693F) / `coral-light` / `coral-dark` - accent (darkened for WCAG AA)
+- `warm-gray` (#5A4D40) - body text (4.5:1 contrast on cream)
+- `warm-gray-light` / `warm-gray-dark` - text variants
+
+**Special accents**:
+- `swedish-blue` (#006AA7) / `swedish-yellow` (#FECC00) - Swedish flag colors
+
+**Custom fonts**: `display` (Playfair Display), `body` (Inter)
+**Custom shadows**: `soft`, `soft-lg`, `warm` (yellow glow)
 
 ### `src/index.css`
-Contains accessibility-critical styles:
+Contains component classes and accessibility-critical styles:
+
+**Component Classes**:
+- `.btn-primary` / `.btn-secondary` / `.btn-accent` / `.btn-ghost` - button variants
+- `.input-field` - styled form inputs
+- `.card` / `.card-yellow` / `.card-forest` / `.card-cream` - card variants
+- `.pill` / `.pill-yellow` / `.pill-forest` / `.pill-coral` - tag/pill components
+
+**Accessibility Styles**:
 - `prefers-reduced-motion` media query - disables all animations
-- `:focus-visible` outline styles - 3px solid forest green
-- `.skip-link` class - positioned off-screen, slides in on focus
+- `:focus-visible` outline styles - 3px solid forest green with 2px offset
+- `.skip-link` class - positioned off-screen, visible on focus
 - `.sr-only` class - visually hidden but accessible to screen readers
-- `.icon-btn` classes - minimum 44×44px touch targets
+- `.icon-btn` / `.icon-btn-coral` - minimum 44×44px touch targets
+
+**Custom Animations** (disabled with prefers-reduced-motion):
+- `@keyframes float` - gentle floating animation for loading icon
+- `@keyframes pulse-soft` - subtle opacity pulsing
 
 ## Accessibility (WCAG 2.1 Level AA)
 
@@ -175,8 +216,15 @@ Maintain proper heading structure for screen reader navigation:
 - **Proxy server required:** URL conversion requires proxy server on port 3001
 - **Privacy-first:** No analytics, no external data storage
 - **User pays:** Users use their own API key and pay for usage
+- **CORS origins:** Proxy server allows localhost:3000 and localhost:5173
 
-## Future Enhancements (Not in Phase 1)
+## Additional Documentation
+
+- **CHANGELOG.md** - Version history and accessibility improvements
+- **README.md** - User-facing documentation
+- **PROJECT_BRIEF.MD** - Original project requirements
+
+## Future Enhancements
 
 - Recipe scaling (adjust servings)
 - Shopping list generation
