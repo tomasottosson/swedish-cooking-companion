@@ -131,7 +131,9 @@ Custom colors defined (WCAG AA compliant):
 Contains accessibility-critical styles:
 - `prefers-reduced-motion` media query - disables all animations
 - `:focus-visible` outline styles - 3px solid forest green
-- Skip link styling for keyboard navigation
+- `.skip-link` class - positioned off-screen, slides in on focus
+- `.sr-only` class - visually hidden but accessible to screen readers
+- `.icon-btn` classes - minimum 44×44px touch targets
 
 ## Accessibility (WCAG 2.1 Level AA)
 
@@ -145,16 +147,27 @@ The app follows WCAG 2.1 Level AA guidelines:
 
 ### Screen Reader Support
 - `aria-label` on all icon-only buttons
-- `aria-live` regions for dynamic content (loading, errors, search)
+- `aria-live` regions for dynamic content (loading, errors, search, copy confirmation)
 - `aria-describedby` linking inputs to hints
 - `aria-hidden="true"` on decorative elements
 - Semantic HTML (`<article>`, `<section>`, `<nav>`, `<dl>`)
 - `sr-only` class for visually hidden but accessible text
 
+### Heading Hierarchy
+Maintain proper heading structure for screen reader navigation:
+- **h1**: Site title in Header.jsx only (one per page)
+- **h2**: Main section headings (recipe title, "Konvertera recept", "Sparade recept", "API-nyckel")
+- **h3**: Sub-sections within h2 (Ingredienser, Instruktioner, Svenska anpassningar, recipe cards)
+
 ### Color & Motion
 - All text meets 4.5:1 contrast ratio minimum
 - `prefers-reduced-motion` respected - all animations disabled
 - Status indicators use text + color (not color alone)
+
+### Touch Targets
+- All icon-only buttons must be minimum 44×44px (use `min-w-[44px] min-h-[44px]`)
+- Use `.icon-btn` or `.icon-btn-coral` classes which include minimum sizing
+- Required for EU Accessibility Directive compliance on mobile devices
 
 ## Important Constraints
 

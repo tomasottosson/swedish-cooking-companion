@@ -17,9 +17,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - `role="switch"` with `aria-checked` for speed mode toggle
   - Focus trap in API key setup modal
   - Screen-reader-only labels (`sr-only`) for emoji-only content context
+  - Copy button now announces "Kopierat!" to screen readers via `aria-live`
 - `prefers-reduced-motion` media query to disable all animations for users who prefer reduced motion
 - Enhanced focus-visible outlines (3px solid forest green) for keyboard navigation
 - Semantic HTML improvements (`<article>`, `<section>`, `<dl>` for recipe metadata)
+- Minimum 44×44px touch targets on all icon buttons (EU mobile accessibility)
 
 ### Changed
 - Color contrast improvements for WCAG AA compliance:
@@ -31,10 +33,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - Body text color updated for improved readability
   - Placeholder text darkened for better contrast
 - Decorative elements marked with `aria-hidden="true"` to reduce screen reader noise
+- Show/hide API key button now exposes text to screen readers (not just aria-label)
 
 ### Fixed
 - File input now uses `sr-only` class instead of `hidden` for better accessibility
 - Recipe list items are now keyboard-navigable with Enter/Space key support
+- Skip link CSS now uses proper positioning technique (visible on focus)
+- Heading hierarchy corrected: single h1 (site title), h2 for sections, h3 for sub-sections
+  - RecipeDisplay: recipe title changed from h1 → h2
+  - RecipeDisplay: Ingredienser/Instruktioner/Svenska anpassningar changed from h2 → h3
 
 ## [1.0.0] - 2026-01-27
 
