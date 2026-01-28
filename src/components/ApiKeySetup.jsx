@@ -57,7 +57,7 @@ export default function ApiKeySetup({ onApiKeySubmit, existingApiKey, onClose })
         <button
           ref={closeButtonRef}
           onClick={onClose}
-          className="absolute top-4 right-4 w-10 h-10 rounded-full bg-cream hover:bg-cream-dark flex items-center justify-center transition-colors text-warm-gray hover:text-forest z-10"
+          className="absolute top-4 right-4 w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-cream hover:bg-cream-dark flex items-center justify-center transition-colors text-warm-gray hover:text-forest z-10"
           aria-label="Stäng inställningar (Esc)"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -130,9 +130,10 @@ export default function ApiKeySetup({ onApiKeySubmit, existingApiKey, onClose })
                 onClick={() => setShowKey(!showKey)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full bg-cream text-sm text-forest font-medium hover:bg-cream-dark transition-colors"
                 aria-pressed={showKey}
-                aria-label={showKey ? 'Dölj API-nyckel' : 'Visa API-nyckel'}
               >
-                <span aria-hidden="true">{showKey ? '🙈 Dölj' : '👁️ Visa'}</span>
+                <span aria-hidden="true">{showKey ? '🙈' : '👁️'}</span>
+                <span className="ml-1">{showKey ? 'Dölj' : 'Visa'}</span>
+                <span className="sr-only"> API-nyckel</span>
               </button>
             </div>
           </div>

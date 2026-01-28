@@ -136,15 +136,15 @@ h1, h2, h3, .font-display {
     @apply nav-tab text-warm-gray hover:bg-cream-dark;
   }
 
-  /* Icon button */
+  /* Icon button - minimum 44x44px touch target (WCAG best practice) */
   .icon-btn {
     @apply p-3 rounded-full bg-cream hover:bg-cream-dark transition-all duration-200
-           flex items-center justify-center;
+           flex items-center justify-center min-w-[44px] min-h-[44px];
   }
 
   .icon-btn-coral {
     @apply p-3 rounded-full bg-coral text-white hover:bg-coral-dark transition-all duration-200
-           flex items-center justify-center;
+           flex items-center justify-center min-w-[44px] min-h-[44px];
   }
 
   /* Section divider */
@@ -255,15 +255,35 @@ textarea::placeholder {
   outline-offset: 2px;
 }
 
-/* Skip link visible on focus */
-.sr-only:focus-within,
-a.sr-only:focus {
+/* Skip link - visible on focus (WCAG 2.1 Level AA) */
+.skip-link {
   position: absolute;
-  width: auto;
-  height: auto;
-  padding: 0.5rem 1rem;
-  margin: 0;
-  overflow: visible;
-  clip: auto;
+  left: -9999px;
+  z-index: 999;
+  padding: 0.75rem 1.5rem;
+  background: #1B4D3E;
+  color: #F5F0E8;
+  font-weight: 600;
+  border-radius: 0 0 0.5rem 0;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  left: 0;
+  top: 0;
+  outline: 3px solid #F7D547;
+  outline-offset: 2px;
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
   white-space: nowrap;
+  border: 0;
 }

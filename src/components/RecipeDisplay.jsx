@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 // Parse simple markdown: **bold** and *italic*
 function parseMarkdown(text) {
@@ -28,6 +28,7 @@ function parseMarkdown(text) {
 export default function RecipeDisplay({ recipe, onSave, onClose }) {
   const [isSaving, setIsSaving] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
+  const [copySuccess, setCopySuccess] = useState(false);
 
   const handleSave = async () => {
     setIsSaving(true);
@@ -55,14 +56,14 @@ export default function RecipeDisplay({ recipe, onSave, onClose }) {
             <div className="flex items-center gap-3 mb-3">
               <span className="pill-yellow">Svenskt recept</span>
             </div>
-            <h1 id="recipe-title" className="text-4xl font-display font-bold text-forest mb-2">{recipe.title}</h1>
+            <h2 id="recipe-title" className="text-4xl font-display font-bold text-forest mb-2">{recipe.title}</h2>
             {recipe.originalTitle && recipe.originalTitle !== recipe.title && (
               <p className="text-warm-gray italic">Original: {recipe.originalTitle}</p>
             )}
           </div>
           <button
             onClick={onClose}
-            className="w-10 h-10 rounded-full bg-cream hover:bg-cream-dark flex items-center justify-center transition-colors text-warm-gray hover:text-forest"
+            className="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-cream hover:bg-cream-dark flex items-center justify-center transition-colors text-warm-gray hover:text-forest"
             aria-label="Stäng recept"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -119,9 +120,9 @@ export default function RecipeDisplay({ recipe, onSave, onClose }) {
               <div className="w-10 h-10 bg-warm-yellow rounded-xl flex items-center justify-center" aria-hidden="true">
                 <span className="text-xl">🥕</span>
               </div>
-              <h2 id="ingredients-heading" className="text-2xl font-display font-bold text-forest">
+              <h3 id="ingredients-heading" className="text-2xl font-display font-bold text-forest">
                 Ingredienser
-              </h2>
+              </h3>
             </div>
             <ul className="space-y-3" aria-label="Lista med ingredienser">
               {recipe.ingredients?.map((ingredient, index) => (
@@ -139,9 +140,9 @@ export default function RecipeDisplay({ recipe, onSave, onClose }) {
               <div className="w-10 h-10 bg-forest rounded-xl flex items-center justify-center" aria-hidden="true">
                 <span className="text-xl">👨‍🍳</span>
               </div>
-              <h2 id="instructions-heading" className="text-2xl font-display font-bold text-forest">
+              <h3 id="instructions-heading" className="text-2xl font-display font-bold text-forest">
                 Instruktioner
-              </h2>
+              </h3>
             </div>
             <ol className="space-y-4" aria-label="Steg-för-steg instruktioner">
               {recipe.instructions?.map((instruction, index) => (
@@ -163,9 +164,9 @@ export default function RecipeDisplay({ recipe, onSave, onClose }) {
               <div className="w-10 h-10 bg-coral rounded-xl flex items-center justify-center" aria-hidden="true">
                 <span className="text-xl">💡</span>
               </div>
-              <h2 id="notes-heading" className="text-2xl font-display font-bold text-forest">
+              <h3 id="notes-heading" className="text-2xl font-display font-bold text-forest">
                 Svenska anpassningar
-              </h2>
+              </h3>
             </div>
             <div className="bg-coral/10 border-2 border-coral/20 rounded-2xl p-5">
               <ul className="space-y-3" aria-label="Tips om svenska anpassningar">
@@ -219,12 +220,25 @@ export default function RecipeDisplay({ recipe, onSave, onClose }) {
                 ?.map((i, idx) => `${idx + 1}. ${i}`)
                 .join('\n')}`;
               navigator.clipboard.writeText(recipeText);
+              setCopySuccess(true);
+              setTimeout(() => setCopySuccess(false), 2000);
             }}
-            className="btn-secondary px-8"
+            className={`px-8 ${copySuccess ? 'bg-forest text-cream' : 'btn-secondary'} rounded-full py-4 font-semibold transition-all flex items-center gap-2 justify-center`}
             aria-label="Kopiera recept till urklipp"
           >
-            <span aria-hidden="true">📋</span>
-            <span>Kopiera</span>
+            {copySuccess ? (
+              <span className="flex items-center gap-2" role="status" aria-live="polite">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+                Kopierat!
+              </span>
+            ) : (
+              <>
+                <span aria-hidden="true">📋</span>
+                <span>Kopiera</span>
+              </>
+            )}
           </button>
         </div>
       </div>
