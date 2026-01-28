@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -15,12 +17,10 @@
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #f9fafb;
-  color: #1f2937;
+  background-color: #F5F0E8;
+  color: #4A4035;
 }
 
 #root {
@@ -28,37 +28,203 @@ body {
   margin: 0 auto;
 }
 
+/* Elegant serif headings */
+h1, h2, h3, .font-display {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
 @layer components {
+  /* Primary button - warm yellow with forest text */
   .btn-primary {
-    @apply bg-swedish-blue text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-warm-yellow text-forest font-semibold px-6 py-3 rounded-full
+           hover:bg-warm-yellow-dark hover:shadow-warm transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed
+           flex items-center gap-2 justify-center;
   }
 
+  /* Secondary button - outlined forest green */
   .btn-secondary {
-    @apply bg-gray-200 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300 transition-colors;
+    @apply bg-transparent text-forest border-2 border-forest px-6 py-3 rounded-full
+           hover:bg-forest hover:text-cream transition-all duration-200
+           flex items-center gap-2 justify-center;
   }
 
+  /* Coral accent button */
+  .btn-accent {
+    @apply bg-coral text-white font-semibold px-6 py-3 rounded-full
+           hover:bg-coral-dark hover:shadow-lg transition-all duration-200
+           flex items-center gap-2 justify-center;
+  }
+
+  /* Ghost button */
+  .btn-ghost {
+    @apply bg-transparent text-warm-gray px-4 py-2 rounded-full
+           hover:bg-cream-dark transition-all duration-200
+           flex items-center gap-2 justify-center;
+  }
+
+  /* Input field - warm styling */
   .input-field {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-swedish-blue focus:border-transparent outline-none text-gray-900 bg-white;
+    @apply w-full px-5 py-3 border-2 border-cream-dark rounded-2xl
+           focus:ring-2 focus:ring-warm-yellow focus:border-warm-yellow
+           outline-none text-warm-gray-dark bg-white
+           transition-all duration-200 placeholder:text-warm-gray-light;
   }
 
+  /* Card styles */
   .card {
-    @apply bg-white rounded-lg shadow-md p-6;
+    @apply bg-white rounded-3xl shadow-soft p-6;
+  }
+
+  .card-yellow {
+    @apply bg-warm-yellow rounded-3xl shadow-soft p-6;
+  }
+
+  .card-forest {
+    @apply bg-forest text-cream rounded-3xl shadow-soft p-6;
+  }
+
+  .card-cream {
+    @apply bg-cream rounded-3xl p-6;
+  }
+
+  /* Decorative blob shapes */
+  .blob {
+    @apply absolute rounded-full opacity-60;
+    filter: blur(40px);
+  }
+
+  .blob-yellow {
+    @apply blob bg-warm-yellow;
+  }
+
+  .blob-coral {
+    @apply blob bg-coral;
+  }
+
+  .blob-forest {
+    @apply blob bg-forest;
+  }
+
+  /* Pill/tag component */
+  .pill {
+    @apply inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium;
+  }
+
+  .pill-yellow {
+    @apply pill bg-warm-yellow-light text-forest;
+  }
+
+  .pill-forest {
+    @apply pill bg-forest text-cream;
+  }
+
+  .pill-coral {
+    @apply pill bg-coral-light text-coral-dark;
+  }
+
+  /* Navigation tab */
+  .nav-tab {
+    @apply px-5 py-2.5 rounded-full font-medium transition-all duration-200;
+  }
+
+  .nav-tab-active {
+    @apply nav-tab bg-forest text-cream;
+  }
+
+  .nav-tab-inactive {
+    @apply nav-tab text-warm-gray hover:bg-cream-dark;
+  }
+
+  /* Icon button */
+  .icon-btn {
+    @apply p-3 rounded-full bg-cream hover:bg-cream-dark transition-all duration-200
+           flex items-center justify-center;
+  }
+
+  .icon-btn-coral {
+    @apply p-3 rounded-full bg-coral text-white hover:bg-coral-dark transition-all duration-200
+           flex items-center justify-center;
+  }
+
+  /* Section divider */
+  .divider {
+    @apply border-t-2 border-cream-dark my-6;
+  }
+
+  /* Organic shape decorations */
+  .organic-shape {
+    @apply absolute pointer-events-none;
   }
 }
 
-/* Fix input text visibility - ensure all inputs have dark text */
+/* Fix input text visibility */
 input[type="text"],
 input[type="url"],
 input[type="password"],
 input[type="search"],
 input[type="file"],
 textarea {
-  color: #111827 !important;
+  color: #4A4035 !important;
   background-color: white !important;
 }
 
-/* Ensure placeholder is visible */
+/* Placeholder styling */
 input::placeholder,
 textarea::placeholder {
-  color: #9ca3af !important;
+  color: #8A7B6B !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E8E0D0;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8A7B6B;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6B5E50;
+}
+
+/* Smooth animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.8; }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 3s ease-in-out infinite;
+}
+
+/* Pattern background */
+.pattern-dots {
+  background-image: radial-gradient(#1B4D3E 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.1;
+}
+
+/* Gradient text */
+.text-gradient {
+  background: linear-gradient(135deg, #1B4D3E 0%, #2D6A4F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

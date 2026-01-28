@@ -54,8 +54,10 @@ export const storage = {
     const lowerQuery = query.toLowerCase();
     return recipes.filter(recipe =>
       recipe.title?.toLowerCase().includes(lowerQuery) ||
+      recipe.originalTitle?.toLowerCase().includes(lowerQuery) ||
       recipe.ingredients?.some(ing => ing.toLowerCase().includes(lowerQuery)) ||
-      recipe.instructions?.toLowerCase().includes(lowerQuery)
+      recipe.instructions?.some(inst => inst.toLowerCase().includes(lowerQuery)) ||
+      recipe.notes?.some(note => note.toLowerCase().includes(lowerQuery))
     );
   },
 
