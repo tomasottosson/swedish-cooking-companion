@@ -118,9 +118,43 @@ localStorage wrapper with methods:
 - `exportRecipes()` / `importRecipes(json)`
 
 ### `tailwind.config.js`
-Custom colors defined:
+Custom colors defined (WCAG AA compliant):
+- `cream` - Background (#F5F0E8)
+- `forest` - Primary green (#1B4D3E)
+- `warm-yellow` - Accent (#F7D547)
+- `coral` - Secondary accent (#C4693F)
+- `warm-gray` - Body text (#5A4D40) - 4.5:1 contrast on cream
 - `swedish-blue` - Swedish flag blue (#006AA7)
 - `swedish-yellow` - Swedish flag yellow (#FECC00)
+
+### `src/index.css`
+Contains accessibility-critical styles:
+- `prefers-reduced-motion` media query - disables all animations
+- `:focus-visible` outline styles - 3px solid forest green
+- Skip link styling for keyboard navigation
+
+## Accessibility (WCAG 2.1 Level AA)
+
+The app follows WCAG 2.1 Level AA guidelines:
+
+### Keyboard Navigation
+- Skip link to bypass navigation ("Hoppa till huvudinnehåll")
+- All interactive elements focusable with visible focus indicators
+- Focus trap in modal dialogs (API key setup)
+- Enter/Space key support on recipe cards
+
+### Screen Reader Support
+- `aria-label` on all icon-only buttons
+- `aria-live` regions for dynamic content (loading, errors, search)
+- `aria-describedby` linking inputs to hints
+- `aria-hidden="true"` on decorative elements
+- Semantic HTML (`<article>`, `<section>`, `<nav>`, `<dl>`)
+- `sr-only` class for visually hidden but accessible text
+
+### Color & Motion
+- All text meets 4.5:1 contrast ratio minimum
+- `prefers-reduced-motion` respected - all animations disabled
+- Status indicators use text + color (not color alone)
 
 ## Important Constraints
 
