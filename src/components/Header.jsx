@@ -19,7 +19,7 @@ export default function Header({ apiKey, onManageApiKey }) {
               <h1 className="text-3xl font-display font-bold text-cream tracking-tight">
                 Swedish Cooking Companion<span className="text-warm-yellow" aria-hidden="true">.</span>
               </h1>
-              <p className="text-forest-light text-sm mt-0.5 font-medium tracking-wide">
+              <p className="text-cream/70 text-sm mt-0.5 font-medium tracking-wide">
                 Svenskifierar internationella recept
               </p>
             </div>
