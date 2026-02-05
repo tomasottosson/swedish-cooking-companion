@@ -7,6 +7,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- Azure deployment configuration
+  - Azure Static Web Apps for frontend hosting (free tier)
+  - Azure App Service for proxy server hosting (free tier)
+  - GitHub Actions CI/CD workflows for automatic deployment on push to main
+  - GitHub OIDC authentication for Static Web Apps (no deployment token needed)
+- Environment variable support for proxy URL (`VITE_PROXY_URL`) and CORS origins (`ALLOWED_ORIGINS`)
+- `.env.production` for production build configuration
 - WCAG 2.1 Level AA accessibility compliance
   - Skip link for keyboard navigation ("Hoppa till huvudinnehåll")
   - ARIA labels on all icon-only buttons for screen readers

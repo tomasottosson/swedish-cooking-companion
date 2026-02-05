@@ -25,7 +25,7 @@ A web application that converts international recipes into Swedish-adapted versi
 - **Styling**: Tailwind CSS
 - **AI**: Anthropic Claude API (Vision + Text)
 - **Storage**: Browser localStorage
-- **Deployment Ready**: Vercel/Netlify compatible
+- **Deployment**: Azure Static Web Apps (frontend) + Azure App Service (proxy)
 
 ## Prerequisites
 
@@ -121,8 +121,13 @@ swedish-cooking-companion/
 │   ├── main.jsx                  # React entry point
 │   └── index.css                 # Global styles & Tailwind
 ├── public/                       # Static assets
+├── .github/
+│   └── workflows/
+│       ├── azure-static-web-apps.yml  # Frontend CI/CD
+│       └── azure-app-service.yml      # Proxy server CI/CD
 ├── .gitignore                    # Git ignore rules
 ├── .env.example                  # Environment variable template
+├── .env.production               # Production environment config
 ├── package.json                  # Dependencies
 ├── vite.config.js                # Vite configuration
 ├── tailwind.config.js            # Tailwind configuration
@@ -217,13 +222,31 @@ The app doesn't just translate - it understands Swedish cooking culture:
 - This has been fixed in the latest version
 - Pull the latest code or check `src/index.css` for input styling
 
+## Deployment
+
+The app is deployed to Azure with automatic CI/CD via GitHub Actions:
+
+- **Frontend**: [Azure Static Web Apps](https://azure.microsoft.com/en-us/products/app-service/static) (free tier) — builds and deploys on push to main using GitHub OIDC authentication
+- **Proxy Server**: [Azure App Service](https://azure.microsoft.com/en-us/products/app-service) (free tier) — deploys `server.js` for CORS-free recipe URL fetching
+
+### Environment Variables
+
+| Variable | Where | Purpose |
+|----------|-------|---------|
+| `VITE_PROXY_URL` | GitHub Actions variable / `.env.production` | Proxy server URL for production builds |
+| `ALLOWED_ORIGINS` | Azure App Service config | Comma-separated CORS origins |
+| `PORT` | Azure App Service config | Server port (Azure default: 8080) |
+| `AZURE_WEBAPP_PUBLISH_PROFILE` | GitHub Actions secret | App Service deployment credential |
+| `AZURE_PROXY_APP_NAME` | GitHub Actions variable | App Service name for deployment |
+
+For local development, the proxy URL defaults to `http://localhost:3001` when `VITE_PROXY_URL` is not set.
+
 ## Future Enhancements (Phase 2)
 
 - Recipe scaling (adjust serving sizes)
 - Shopping list generation
 - Meal planning features
 - Recipe ratings and notes
-- Backend proxy for easier API key management
 - Multi-language support
 
 ## Contributing
