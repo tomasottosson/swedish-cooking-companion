@@ -15,6 +15,8 @@ A React web app that converts international recipes into Swedish-adapted version
   - Claude Sonnet 4.5 (quality mode) - best results
 - **Browser localStorage** for persistence (API key + saved recipes)
 - **Express.js proxy server** for CORS-free URL fetching
+- **Azure Static Web Apps** (frontend hosting) + **Azure App Service** (proxy server)
+- **GitHub Actions** for CI/CD (auto-deploy on push to main)
 
 ## Project Structure
 
@@ -115,7 +117,11 @@ Contains the system prompt with all Swedification rules. This is the heart of th
 - `imageToBase64(file)` - Helper for image uploads (5MB limit)
 
 ### `server.js`
-Express.js proxy server that bypasses CORS restrictions when fetching recipe URLs. Must be running for URL-based recipe conversion.
+Express.js proxy server that bypasses CORS restrictions when fetching recipe URLs. Must be running for URL-based recipe conversion. Deployed to Azure App Service in production.
+
+**Environment variables**:
+- `PORT` - Server port (default: 3001, Azure uses 8080)
+- `ALLOWED_ORIGINS` - Comma-separated CORS origins (default: localhost:3000, localhost:5173)
 
 **Endpoints**:
 - `POST /api/fetch-recipe` - Fetches HTML from recipe URLs
@@ -213,10 +219,23 @@ Maintain proper heading structure for screen reader navigation:
 ## Important Constraints
 
 - **Image size limit:** 5MB max for uploaded recipe images
-- **Proxy server required:** URL conversion requires proxy server on port 3001
+- **Proxy server required:** URL conversion requires proxy server (localhost:3001 in dev, Azure App Service in prod)
 - **Privacy-first:** No analytics, no external data storage
 - **User pays:** Users use their own API key and pay for usage
-- **CORS origins:** Proxy server allows localhost:3000 and localhost:5173
+- **CORS origins:** Configurable via `ALLOWED_ORIGINS` env var (defaults to localhost:3000 and localhost:5173)
+- **Proxy URL:** Configurable via `VITE_PROXY_URL` env var (defaults to http://localhost:3001)
+
+## Deployment
+
+The app deploys to Azure via GitHub Actions on push to main:
+
+- **Frontend** → Azure Static Web Apps (GitHub OIDC auth, no deployment token needed)
+- **Proxy server** → Azure App Service (publish profile secret)
+
+Key files:
+- `.github/workflows/azure-static-web-apps.yml` - Frontend CI/CD
+- `.github/workflows/azure-app-service.yml` - Proxy server CI/CD
+- `.env.production` - Production `VITE_PROXY_URL` (committed, no secrets)
 
 ## Additional Documentation
 
@@ -228,5 +247,4 @@ Maintain proper heading structure for screen reader navigation:
 
 - Recipe scaling (adjust servings)
 - Shopping list generation
-- Backend proxy for API key
 - Multi-language support

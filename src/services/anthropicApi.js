@@ -161,7 +161,8 @@ export async function convertRecipe(input, apiKey, onProgress, options = {}) {
     if (input.type === 'url') {
       onProgress?.('Fetching recipe from URL...');
       // Fetch the URL content via proxy server to avoid CORS issues
-      const proxyUrl = 'http://localhost:3001/api/fetch-recipe';
+      const proxyBase = import.meta.env.VITE_PROXY_URL || 'http://localhost:3001';
+      const proxyUrl = `${proxyBase}/api/fetch-recipe`;
       const response = await fetch(proxyUrl, {
         method: 'POST',
         headers: {
