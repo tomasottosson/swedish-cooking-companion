@@ -201,7 +201,7 @@ export default function RecipeInput({ onConvert, isLoading }) {
                 </span>
               </div>
               <p id="url-hint" className="text-sm text-warm-gray">
-                Exempel: https://goop.com/recipes/thomas-keller-lemon-tart/
+                Exempel: https://www.ytrecipe.com/recipes/boeuf-bourguignon-julia-child
               </p>
             </div>
           ) : inputType === 'text' ? (
