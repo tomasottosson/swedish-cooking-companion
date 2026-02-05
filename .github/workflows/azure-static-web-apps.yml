@@ -31,7 +31,6 @@ jobs:
           action: "upload"
           app_location: "/"
           output_location: "dist"
-          deployment_environment: "production"
         env:
           VITE_PROXY_URL: ${{ vars.VITE_PROXY_URL }}
 
