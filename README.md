@@ -1,6 +1,7 @@
 # Swedish Cooking Companion 🇸🇪
 
 A web application that converts international recipes into Swedish-adapted versions with proper measurements, ingredient substitutions, and cultural context. Perfect for Swedish home cooks who find recipes online but need them adapted to Swedish ingredients, measurements, and terminology.
+<img width="1144" height="839" alt="image" src="https://github.com/user-attachments/assets/d5a38108-263e-44d4-ab9a-5337bff56ee2" />
 
 ## Features
 
