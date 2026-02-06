@@ -27,9 +27,20 @@ jobs:
       - name: Install production dependencies
         run: npm ci --production
 
+      - name: Set App Service settings
+        uses: azure/appservice-settings@v1
+        with:
+          app-name: ${{ vars.AZURE_PROXY_APP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          app-settings-json: |
+            [
+              { "name": "ALLOWED_ORIGINS", "value": "${{ vars.ALLOWED_ORIGINS }}" },
+              { "name": "PORT", "value": "8080" }
+            ]
+
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ vars.AZURE_PROXY_APP_NAME }}
-          # publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: .
