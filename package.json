@@ -6,6 +6,7 @@
   "description": "A web application that converts international recipes into Swedish-adapted versions",
   "scripts": {
     "dev": "vite",
+    "start": "node --env-file=.env.production server.js",
     "server": "node server.js",
     "dev:all": "concurrently \"npm run server\" \"npm run dev\"",
     "build": "vite build",
