@@ -77,7 +77,7 @@ npm run dev
 
 **From URL:**
 1. Click the "URL" tab
-2. Paste a recipe URL (e.g., https://goop.com/recipes/thomas-keller-lemon-tart/)
+2. Paste a recipe URL (e.g., https://www.ytrecipe.com/recipes/boeuf-bourguignon-julia-child)
 3. Click "Konvertera till svenskt recept"
 4. Wait for Claude to work its magic!
 
