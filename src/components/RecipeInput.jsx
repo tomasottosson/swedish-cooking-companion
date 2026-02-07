@@ -139,23 +139,23 @@ export default function RecipeInput({ onConvert, isLoading }) {
   return (
     <div className="card relative overflow-hidden" role="region" aria-labelledby="convert-heading">
       {/* Decorative elements */}
-      <div className="absolute -top-10 -right-10 w-32 h-32 bg-warm-yellow/20 rounded-full" aria-hidden="true"></div>
-      <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-coral/10 rounded-full" aria-hidden="true"></div>
+      <div className="absolute -top-10 -right-10 w-32 h-32 bg-coral/10 rounded-full" aria-hidden="true"></div>
+      <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-terracotta/10 rounded-full" aria-hidden="true"></div>
 
       <div className="relative">
         {/* Header */}
         <div className="text-center mb-8">
-          <h2 id="convert-heading" className="text-3xl font-display font-bold text-forest mb-2">
+          <h2 id="convert-heading" className="text-3xl font-display font-bold text-teal mb-2">
             Konvertera recept
           </h2>
-          <p className="text-warm-gray">
+          <p className="text-earth">
             Klistra in en länk, text eller ladda upp en bild
           </p>
         </div>
 
         {/* Input Type Selector - Tab style */}
         <div className="flex justify-center mb-8">
-          <div className="inline-flex bg-cream rounded-full p-1.5 gap-1" role="tablist" aria-label="Välj inmatningstyp">
+          <div className="inline-flex bg-sand/50 rounded-full p-1.5 gap-1" role="tablist" aria-label="Välj inmatningstyp">
             {inputTypes.map((type) => (
               <button
                 key={type.id}
@@ -167,8 +167,8 @@ export default function RecipeInput({ onConvert, isLoading }) {
                 onClick={() => setInputType(type.id)}
                 className={`flex items-center gap-2 px-5 py-2.5 rounded-full font-medium transition-all duration-200 ${
                   inputType === type.id
-                    ? 'bg-forest text-cream shadow-soft'
-                    : 'text-warm-gray hover:text-forest'
+                    ? 'bg-teal text-cream shadow-soft'
+                    : 'text-earth hover:text-teal'
                 }`}
               >
                 <span aria-hidden="true">{type.icon}</span>
@@ -182,7 +182,7 @@ export default function RecipeInput({ onConvert, isLoading }) {
         <form onSubmit={handleSubmit} className="space-y-6">
           {inputType === 'url' ? (
             <div className="space-y-3" role="tabpanel" id="url-panel" aria-labelledby="url-tab">
-              <label htmlFor="url" className="block text-sm font-semibold text-forest">
+              <label htmlFor="url" className="block text-sm font-semibold text-teal">
                 Recept-URL
               </label>
               <div className="relative">
@@ -196,17 +196,17 @@ export default function RecipeInput({ onConvert, isLoading }) {
                   disabled={isLoading}
                   aria-describedby="url-hint"
                 />
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-warm-gray-light" aria-hidden="true">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-earth-light" aria-hidden="true">
                   🌐
                 </span>
               </div>
-              <p id="url-hint" className="text-sm text-warm-gray">
+              <p id="url-hint" className="text-sm text-earth">
                 Exempel: https://www.ytrecipe.com/recipes/boeuf-bourguignon-julia-child
               </p>
             </div>
           ) : inputType === 'text' ? (
             <div className="space-y-3" role="tabpanel" id="text-panel" aria-labelledby="text-tab">
-              <label htmlFor="recipeText" className="block text-sm font-semibold text-forest">
+              <label htmlFor="recipeText" className="block text-sm font-semibold text-teal">
                 Recepttext
               </label>
               <textarea
@@ -219,13 +219,13 @@ export default function RecipeInput({ onConvert, isLoading }) {
                 spellCheck={false}
                 aria-describedby="text-hint"
               />
-              <p id="text-hint" className="text-sm text-warm-gray">
+              <p id="text-hint" className="text-sm text-earth">
                 Tips: Kopiera recepttexten från webbsidan och klistra in här.
               </p>
             </div>
           ) : (
             <div className="space-y-3" role="tabpanel" id="image-panel" aria-labelledby="image-tab">
-              <label htmlFor="image" className="block text-sm font-semibold text-forest">
+              <label htmlFor="image" className="block text-sm font-semibold text-teal">
                 Receptbild
               </label>
               <input
@@ -244,10 +244,10 @@ export default function RecipeInput({ onConvert, isLoading }) {
                 onDrop={handleDrop}
                 className={`block w-full border-2 border-dashed rounded-3xl p-10 text-center cursor-pointer transition-all duration-200 ${
                   isDragging
-                    ? 'border-warm-yellow bg-warm-yellow-light/30 scale-[1.02]'
+                    ? 'border-coral bg-coral/10 scale-[1.02]'
                     : imagePreview
-                    ? 'border-forest/30 bg-cream'
-                    : 'border-cream-dark hover:border-forest/50 hover:bg-cream'
+                    ? 'border-teal/30 bg-sand/30'
+                    : 'border-sand-dark hover:border-coral/50 hover:bg-sand/30'
                 }`}
                 role="button"
                 tabIndex={0}
@@ -280,13 +280,13 @@ export default function RecipeInput({ onConvert, isLoading }) {
                   </div>
                 ) : (
                   <div className="space-y-3">
-                    <div className="w-16 h-16 bg-cream-dark rounded-2xl flex items-center justify-center mx-auto" aria-hidden="true">
+                    <div className="w-16 h-16 bg-sand rounded-2xl flex items-center justify-center mx-auto" aria-hidden="true">
                       <span className="text-3xl">📷</span>
                     </div>
-                    <p className="text-forest font-medium">
+                    <p className="text-teal font-medium">
                       {isDragging ? 'Släpp bilden här' : 'Klicka eller dra en bild hit'}
                     </p>
-                    <p id="image-hint" className="text-sm text-warm-gray">Max storlek: 5MB</p>
+                    <p id="image-hint" className="text-sm text-earth">Max storlek: 5MB</p>
                   </div>
                 )}
               </label>
@@ -301,19 +301,19 @@ export default function RecipeInput({ onConvert, isLoading }) {
           )}
 
           {/* Speed Mode Toggle - Card style */}
-          <div className="bg-cream rounded-2xl p-5">
+          <div className="bg-sand/40 rounded-2xl p-5">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                  useQuickMode ? 'bg-warm-yellow' : 'bg-forest'
+                  useQuickMode ? 'bg-coral/20' : 'bg-teal/15'
                 }`} aria-hidden="true">
                   <span className="text-lg">{useQuickMode ? '⚡' : '✨'}</span>
                 </div>
                 <div id="speed-mode-description">
-                  <span className="font-semibold text-forest block">
+                  <span className="font-semibold text-teal block">
                     {useQuickMode ? MODELS.fast.name : MODELS.quality.name}
                   </span>
-                  <p className="text-sm text-warm-gray mt-0.5">
+                  <p className="text-sm text-earth mt-0.5">
                     {useQuickMode ? MODELS.fast.description : MODELS.quality.description}
                   </p>
                 </div>
@@ -325,7 +325,7 @@ export default function RecipeInput({ onConvert, isLoading }) {
                 aria-labelledby="speed-mode-description"
                 onClick={() => setUseQuickMode(!useQuickMode)}
                 className={`relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 ${
-                  useQuickMode ? 'bg-warm-yellow' : 'bg-forest'
+                  useQuickMode ? 'bg-coral' : 'bg-teal'
                 }`}
                 disabled={isLoading}
               >

@@ -7,27 +7,38 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Primary palette - warm and vibrant
-        'cream': '#F5F0E8',
-        'cream-dark': '#E8E0D0',
-        'warm-yellow': '#F7D547',
-        'warm-yellow-light': '#FBE88A',
-        'warm-yellow-dark': '#D4A800', // Darkened for better contrast
+        // Primary - Light sage background (lighter, greener palette)
+        'terracotta': '#D4DFCA',
+        'terracotta-light': '#E0E9D6',
+        'terracotta-dark': '#C0CFAE',
 
-        // Deep forest green
-        'forest': '#1B4D3E',
-        'forest-light': '#2D6A4F',
-        'forest-dark': '#143D31',
+        // Surface colors - warm white for cards
+        'cream': '#FEFCF8',
+        'cream-dark': '#F2EDE4',
 
-        // Coral/Orange accent
-        'coral': '#C4693F', // Darkened from #E07B54 for WCAG AA contrast
-        'coral-light': '#D97B50', // Darkened from #F09070 for better contrast
-        'coral-dark': '#A35530', // Darkened from #C4693F for consistency
+        // Deep forest green - headings and primary text
+        'teal': '#2D6B47',
+        'teal-light': '#3D8A5A',
+        'teal-dark': '#1D4F33',
 
-        // Warm neutrals - improved contrast ratios
-        'warm-gray': '#5A4D40', // Darkened from #6B5E50 for 4.5:1 contrast on cream
-        'warm-gray-light': '#6B5E50', // Was #8A7B6B, now meets contrast requirements
-        'warm-gray-dark': '#3D3429', // Darkened from #4A4035 for better contrast
+        // Coral/Salmon - CTAs and warm accents
+        'coral': '#D4785C',
+        'coral-light': '#E49A85',
+        'coral-dark': '#B86045',
+
+        // Earth/olive neutrals - body text
+        'earth': '#4A5E40',
+        'earth-light': '#6B7C60',
+        'earth-dark': '#354530',
+
+        // Nature accent - bright olive
+        'olive': '#5A8042',
+        'olive-light': '#7AA05A',
+        'olive-dark': '#3D5F2E',
+
+        // Sand/sage - borders, dividers, secondary surfaces
+        'sand': '#C5D6B2',
+        'sand-dark': '#ADBF98',
 
         // Keep Swedish colors for special accents
         'swedish-blue': '#006AA7',
@@ -43,9 +54,10 @@ export default {
         '4xl': '2rem',
       },
       boxShadow: {
-        'soft': '0 4px 20px rgba(0, 0, 0, 0.08)',
-        'soft-lg': '0 8px 30px rgba(0, 0, 0, 0.12)',
-        'warm': '0 4px 20px rgba(247, 213, 71, 0.3)',
+        'soft': '0 4px 20px rgba(45, 107, 71, 0.08)',
+        'soft-lg': '0 8px 30px rgba(45, 107, 71, 0.12)',
+        'warm': '0 4px 20px rgba(212, 120, 92, 0.25)',
+        'card': '0 2px 16px rgba(45, 107, 71, 0.06)',
       },
     },
   },

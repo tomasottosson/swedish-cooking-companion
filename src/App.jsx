@@ -71,8 +71,8 @@ function App() {
 
   if (showApiKeySetup) {
     return (
-      <div className="min-h-screen bg-cream">
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-forest focus:text-cream focus:px-4 focus:py-2 focus:rounded-lg">
+      <div className="min-h-screen bg-terracotta">
+        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-teal focus:text-cream focus:px-4 focus:py-2 focus:rounded-lg">
           Hoppa till huvudinnehåll
         </a>
         <Header apiKey={apiKey} onManageApiKey={handleManageApiKey} />
@@ -88,27 +88,50 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-cream relative overflow-hidden">
+    <div className="min-h-screen bg-terracotta relative overflow-hidden">
       {/* Skip link for keyboard navigation */}
       <a href="#main-content" className="skip-link">
         Hoppa till huvudinnehåll
       </a>
 
-      {/* Background decorative elements */}
+      {/* Background nature-inspired decorative elements */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        <div className="absolute top-1/4 -left-32 w-64 h-64 bg-warm-yellow/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-3/4 -right-32 w-80 h-80 bg-coral/10 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-1/3 w-96 h-96 bg-forest/5 rounded-full blur-3xl"></div>
+        {/* Subtle organic shapes - green landscape */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 320" className="w-full opacity-20" preserveAspectRatio="none">
+            <path fill="#B5C9A0" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,208C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" />
+          </svg>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 320" className="w-full opacity-15" preserveAspectRatio="none">
+            <path fill="#A0B88A" d="M0,288L60,272C120,256,240,224,360,224C480,224,600,256,720,272C840,288,960,288,1080,266.7C1200,245,1320,203,1380,181.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z" />
+          </svg>
+        </div>
+        {/* Mountain silhouettes - sage green */}
+        <svg className="absolute bottom-24 right-0 w-80 h-48 opacity-10" viewBox="0 0 320 200">
+          <polygon points="160,10 280,180 40,180" fill="#5A8042" />
+          <polygon points="240,40 340,180 140,180" fill="#4A6E36" />
+          <polygon points="80,50 160,180 0,180" fill="#6B9050" />
+        </svg>
+        {/* Tree silhouettes */}
+        <svg className="absolute bottom-16 left-12 w-16 h-32 opacity-15" viewBox="0 0 60 120">
+          <ellipse cx="30" cy="40" rx="22" ry="35" fill="#5A8042" />
+          <rect x="26" y="70" width="8" height="30" fill="#3D5F2E" />
+        </svg>
+        <svg className="absolute bottom-20 left-1/3 w-12 h-24 opacity-10" viewBox="0 0 60 120">
+          <ellipse cx="30" cy="40" rx="22" ry="35" fill="#5A8042" />
+          <rect x="26" y="70" width="8" height="30" fill="#3D5F2E" />
+        </svg>
       </div>
 
       <div className="relative">
         <Header apiKey={apiKey} onManageApiKey={handleManageApiKey} />
 
         {/* Navigation Tabs */}
-        <div className="bg-white/80 backdrop-blur-sm border-b border-cream-dark sticky top-0 z-10">
+        <div className="bg-cream/90 backdrop-blur-sm border-b border-sand sticky top-0 z-10">
           <div className="container mx-auto px-6">
             <nav className="flex items-center justify-center gap-2 py-4" aria-label="Huvudnavigering">
-              <div className="inline-flex bg-cream rounded-full p-1.5" role="tablist" aria-label="Applikationsvyer">
+              <div className="inline-flex bg-sand/50 rounded-full p-1.5" role="tablist" aria-label="Applikationsvyer">
                 <button
                   role="tab"
                   aria-selected={currentView === 'input' || currentView === 'display'}
@@ -116,8 +139,8 @@ function App() {
                   onClick={() => setCurrentView('input')}
                   className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-medium transition-all duration-200 ${
                     currentView === 'input' || currentView === 'display'
-                      ? 'bg-forest text-cream shadow-soft'
-                      : 'text-warm-gray hover:text-forest'
+                      ? 'bg-teal text-cream shadow-soft'
+                      : 'text-earth hover:text-teal'
                   }`}
                 >
                   <span aria-hidden="true">🍳</span>
@@ -130,14 +153,14 @@ function App() {
                   onClick={() => setCurrentView('saved')}
                   className={`flex items-center gap-2 px-6 py-2.5 rounded-full font-medium transition-all duration-200 ${
                     currentView === 'saved'
-                      ? 'bg-forest text-cream shadow-soft'
-                      : 'text-warm-gray hover:text-forest'
+                      ? 'bg-teal text-cream shadow-soft'
+                      : 'text-earth hover:text-teal'
                   }`}
                 >
                   <span aria-hidden="true">📚</span>
                   <span>Sparade</span>
                   {savedRecipesCount > 0 && (
-                    <span className="bg-warm-yellow text-forest text-xs font-bold px-2 py-0.5 rounded-full" aria-label={`${savedRecipesCount} sparade recept`}>
+                    <span className="bg-coral text-white text-xs font-bold px-2 py-0.5 rounded-full" aria-label={`${savedRecipesCount} sparade recept`}>
                       {savedRecipesCount}
                     </span>
                   )}
@@ -152,29 +175,29 @@ function App() {
           {isLoading && (
             <div className="card max-w-lg mx-auto text-center relative overflow-hidden" role="status" aria-busy="true" aria-live="polite">
               {/* Animated background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-warm-yellow/20 via-transparent to-coral/10" aria-hidden="true"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-coral/10 via-transparent to-terracotta/5" aria-hidden="true"></div>
 
               <div className="relative flex flex-col items-center gap-6 py-8">
                 {/* Cooking animation */}
                 <div className="relative" aria-hidden="true">
-                  <div className="w-20 h-20 bg-warm-yellow rounded-3xl flex items-center justify-center animate-float">
+                  <div className="w-20 h-20 bg-coral/20 rounded-3xl flex items-center justify-center animate-float">
                     <span className="text-4xl">🍳</span>
                   </div>
-                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-3 bg-forest/10 rounded-full blur-sm"></div>
+                  <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-16 h-3 bg-earth/10 rounded-full blur-sm"></div>
                 </div>
 
                 <div className="space-y-2">
-                  <p className="text-2xl font-display font-bold text-forest">Konverterar...</p>
+                  <p className="text-2xl font-display font-bold text-teal">Konverterar...</p>
                   {progressMessage && (
-                    <p className="text-warm-gray" aria-live="polite">{progressMessage}</p>
+                    <p className="text-earth" aria-live="polite">{progressMessage}</p>
                   )}
                 </div>
 
                 {/* Progress dots */}
                 <div className="flex gap-2" aria-hidden="true">
-                  <span className="w-3 h-3 bg-forest rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                  <span className="w-3 h-3 bg-forest rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                  <span className="w-3 h-3 bg-forest rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                  <span className="w-3 h-3 bg-coral rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                  <span className="w-3 h-3 bg-coral rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                  <span className="w-3 h-3 bg-coral rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
                 </div>
               </div>
             </div>
@@ -191,8 +214,8 @@ function App() {
                     <span className="text-3xl">😕</span>
                   </div>
                   <div>
-                    <h3 className="text-xl font-display font-bold text-forest mb-2">Något gick fel</h3>
-                    <p className="text-warm-gray">{error}</p>
+                    <h3 className="text-xl font-display font-bold text-teal mb-2">Något gick fel</h3>
+                    <p className="text-earth">{error}</p>
                   </div>
                 </div>
                 <button
@@ -233,20 +256,20 @@ function App() {
         </main>
 
         {/* Footer */}
-        <footer className="relative mt-16 py-10 border-t border-cream-dark" role="contentinfo">
+        <footer className="relative mt-16 py-10 border-t border-sand" role="contentinfo">
           <div className="container mx-auto px-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-forest rounded-xl flex items-center justify-center" aria-hidden="true">
+                <div className="w-10 h-10 bg-teal/10 rounded-xl flex items-center justify-center" aria-hidden="true">
                   <span className="text-lg">🍳</span>
                 </div>
                 <div>
-                  <p className="font-display font-bold text-forest">Swedish Cooking Companion.</p>
-                  <p className="text-sm text-warm-gray">Powered by Claude AI</p>
+                  <p className="font-display font-bold text-teal">Swedish Cooking Companion.</p>
+                  <p className="text-sm text-earth-light">Powered by Claude AI</p>
                 </div>
               </div>
-              <div className="flex items-center gap-2 text-sm text-warm-gray">
-                <span className="w-2 h-2 bg-forest rounded-full" aria-hidden="true"></span>
+              <div className="flex items-center gap-2 text-sm text-earth-light">
+                <span className="w-2 h-2 bg-olive rounded-full" aria-hidden="true"></span>
                 <span>Din data lagras lokalt i din webbläsare</span>
               </div>
             </div>

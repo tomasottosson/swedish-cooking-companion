@@ -19,8 +19,8 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #F5F0E8;
-  color: #3D3429; /* Improved contrast for WCAG AA compliance */
+  background-color: #D4DFCA;
+  color: #354530;
 }
 
 #root {
@@ -34,76 +34,76 @@ h1, h2, h3, .font-display {
 }
 
 @layer components {
-  /* Primary button - warm yellow with forest text */
+  /* Primary button - coral/salmon with white text */
   .btn-primary {
-    @apply bg-warm-yellow text-forest font-semibold px-6 py-3 rounded-full
-           hover:bg-warm-yellow-dark hover:shadow-warm transition-all duration-200
+    @apply bg-coral text-white font-semibold px-6 py-3 rounded-full
+           hover:bg-coral-dark hover:shadow-warm transition-all duration-200
            disabled:opacity-50 disabled:cursor-not-allowed
            flex items-center gap-2 justify-center;
   }
 
-  /* Secondary button - outlined forest green */
+  /* Secondary button - outlined teal */
   .btn-secondary {
-    @apply bg-transparent text-forest border-2 border-forest px-6 py-3 rounded-full
-           hover:bg-forest hover:text-cream transition-all duration-200
+    @apply bg-transparent text-teal border-2 border-teal px-6 py-3 rounded-full
+           hover:bg-teal hover:text-cream transition-all duration-200
            flex items-center gap-2 justify-center;
   }
 
-  /* Coral accent button */
+  /* Accent button - terracotta */
   .btn-accent {
-    @apply bg-coral text-white font-semibold px-6 py-3 rounded-full
-           hover:bg-coral-dark hover:shadow-lg transition-all duration-200
+    @apply bg-terracotta text-white font-semibold px-6 py-3 rounded-full
+           hover:bg-terracotta-dark hover:shadow-lg transition-all duration-200
            flex items-center gap-2 justify-center;
   }
 
   /* Ghost button */
   .btn-ghost {
-    @apply bg-transparent text-warm-gray px-4 py-2 rounded-full
-           hover:bg-cream-dark transition-all duration-200
+    @apply bg-transparent text-earth px-4 py-2 rounded-full
+           hover:bg-sand transition-all duration-200
            flex items-center gap-2 justify-center;
   }
 
   /* Input field - warm styling */
   .input-field {
-    @apply w-full px-5 py-3 border-2 border-cream-dark rounded-2xl
-           focus:ring-2 focus:ring-warm-yellow focus:border-warm-yellow
-           outline-none text-warm-gray-dark bg-white
-           transition-all duration-200 placeholder:text-warm-gray-light;
+    @apply w-full px-5 py-3 border-2 border-sand rounded-2xl
+           focus:ring-2 focus:ring-coral focus:border-coral
+           outline-none text-earth-dark bg-white
+           transition-all duration-200 placeholder:text-earth-light;
   }
 
   /* Card styles */
   .card {
-    @apply bg-white rounded-3xl shadow-soft p-6;
+    @apply bg-cream rounded-3xl shadow-card p-6;
   }
 
-  .card-yellow {
-    @apply bg-warm-yellow rounded-3xl shadow-soft p-6;
+  .card-coral {
+    @apply bg-coral/10 rounded-3xl shadow-card p-6;
   }
 
-  .card-forest {
-    @apply bg-forest text-cream rounded-3xl shadow-soft p-6;
+  .card-teal {
+    @apply bg-teal text-cream rounded-3xl shadow-card p-6;
   }
 
-  .card-cream {
-    @apply bg-cream rounded-3xl p-6;
+  .card-sand {
+    @apply bg-sand/50 rounded-3xl p-6;
   }
 
   /* Decorative blob shapes */
   .blob {
-    @apply absolute rounded-full opacity-60;
-    filter: blur(40px);
+    @apply absolute rounded-full opacity-40;
+    filter: blur(50px);
   }
 
-  .blob-yellow {
-    @apply blob bg-warm-yellow;
+  .blob-terracotta {
+    @apply blob bg-terracotta;
   }
 
   .blob-coral {
     @apply blob bg-coral;
   }
 
-  .blob-forest {
-    @apply blob bg-forest;
+  .blob-olive {
+    @apply blob bg-olive;
   }
 
   /* Pill/tag component */
@@ -111,16 +111,20 @@ h1, h2, h3, .font-display {
     @apply inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium;
   }
 
-  .pill-yellow {
-    @apply pill bg-warm-yellow-light text-forest;
-  }
-
-  .pill-forest {
-    @apply pill bg-forest text-cream;
-  }
-
   .pill-coral {
-    @apply pill bg-coral-light text-coral-dark;
+    @apply pill bg-coral/15 text-coral-dark;
+  }
+
+  .pill-teal {
+    @apply pill bg-teal/10 text-teal;
+  }
+
+  .pill-olive {
+    @apply pill bg-olive/15 text-olive-dark;
+  }
+
+  .pill-sand {
+    @apply pill bg-sand text-earth;
   }
 
   /* Navigation tab */
@@ -129,16 +133,16 @@ h1, h2, h3, .font-display {
   }
 
   .nav-tab-active {
-    @apply nav-tab bg-forest text-cream;
+    @apply nav-tab bg-teal text-cream;
   }
 
   .nav-tab-inactive {
-    @apply nav-tab text-warm-gray hover:bg-cream-dark;
+    @apply nav-tab text-earth hover:bg-sand;
   }
 
   /* Icon button - minimum 44x44px touch target (WCAG best practice) */
   .icon-btn {
-    @apply p-3 rounded-full bg-cream hover:bg-cream-dark transition-all duration-200
+    @apply p-3 rounded-full bg-sand/50 hover:bg-sand transition-all duration-200
            flex items-center justify-center min-w-[44px] min-h-[44px];
   }
 
@@ -149,7 +153,7 @@ h1, h2, h3, .font-display {
 
   /* Section divider */
   .divider {
-    @apply border-t-2 border-cream-dark my-6;
+    @apply border-t-2 border-sand my-6;
   }
 
   /* Organic shape decorations */
@@ -165,14 +169,14 @@ input[type="password"],
 input[type="search"],
 input[type="file"],
 textarea {
-  color: #3D3429 !important; /* Improved contrast */
+  color: #354530 !important;
   background-color: white !important;
 }
 
 /* Placeholder styling - improved contrast for WCAG AA */
 input::placeholder,
 textarea::placeholder {
-  color: #6B5E50 !important; /* Darker for 4.5:1 contrast ratio */
+  color: #6B7C60 !important;
 }
 
 /* Custom scrollbar */
@@ -182,17 +186,17 @@ textarea::placeholder {
 }
 
 ::-webkit-scrollbar-track {
-  background: #E8E0D0;
+  background: #E0E9D6;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #8A7B6B;
+  background: #ADBF98;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #6B5E50;
+  background: #3D8A5A;
 }
 
 /* Smooth animations */
@@ -234,16 +238,9 @@ textarea::placeholder {
   }
 }
 
-/* Pattern background */
-.pattern-dots {
-  background-image: radial-gradient(#1B4D3E 1px, transparent 1px);
-  background-size: 20px 20px;
-  opacity: 0.1;
-}
-
 /* Gradient text */
 .text-gradient {
-  background: linear-gradient(135deg, #1B4D3E 0%, #2D6A4F 100%);
+  background: linear-gradient(135deg, #2D6B47 0%, #3D8A5A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -251,7 +248,7 @@ textarea::placeholder {
 
 /* Enhanced focus styles for accessibility (WCAG 2.1 Level AA) */
 :focus-visible {
-  outline: 3px solid #1B4D3E;
+  outline: 3px solid #2D6B47;
   outline-offset: 2px;
 }
 
@@ -261,8 +258,8 @@ textarea::placeholder {
   left: -9999px;
   z-index: 999;
   padding: 0.75rem 1.5rem;
-  background: #1B4D3E;
-  color: #F5F0E8;
+  background: #2D6B47;
+  color: #FEFCF8;
   font-weight: 600;
   border-radius: 0 0 0.5rem 0;
   text-decoration: none;
@@ -271,7 +268,7 @@ textarea::placeholder {
 .skip-link:focus {
   left: 0;
   top: 0;
-  outline: 3px solid #F7D547;
+  outline: 3px solid #D4785C;
   outline-offset: 2px;
 }
 
