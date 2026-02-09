@@ -1,7 +1,7 @@
 {
   "name": "swedish-cooking-companion",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.1.0",
   "type": "module",
   "description": "A web application that converts international recipes into Swedish-adapted versions",
   "scripts": {
