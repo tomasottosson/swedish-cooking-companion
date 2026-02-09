@@ -50,6 +50,21 @@ npm run preview   # Preview production build
 
 **IMPORTANT**: For URL recipe conversion to work, you MUST run the proxy server. Use `npm run dev:all` to start both servers at once.
 
+## Commit Convention
+
+This project uses [Conventional Commits](https://www.conventionalcommits.org/):
+
+- `feat:` — new user-facing feature → bumps **minor** (1.1.0 → 1.2.0)
+- `fix:` — bug fix → bumps **patch** (1.1.0 → 1.1.1)
+- `docs:` — documentation only
+- `style:` — formatting, CSS, no logic change
+- `refactor:` — code restructuring, no behavior change
+- `chore:` — build, deps, CI config
+- `test:` — adding or fixing tests
+
+Add `BREAKING CHANGE:` in the commit body for major bumps.
+Only `feat` and `fix` trigger version bumps. Other types are included in the changelog but don't bump the version.
+
 ## Key Patterns & Conventions
 
 ### State Management
