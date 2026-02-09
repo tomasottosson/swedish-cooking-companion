@@ -150,7 +150,8 @@ npm run preview   # Preview production build
 ## API Usage & Costs
 
 This app uses the Anthropic Claude API:
-- **Model**: Claude Sonnet 4.5 (claude-sonnet-4-5-20250929)
+- **Quality mode**: Claude Sonnet 4.5 — best results
+- **Fast mode**: Claude Haiku 4.5 — quicker conversions, lower cost
 - **Typical cost per recipe**: $0.01-0.05 USD
 - **Image processing**: Slightly higher cost for image-based recipes
 - **You control costs**: Since you use your own API key, you only pay for what you use
