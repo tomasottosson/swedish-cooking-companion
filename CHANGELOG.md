@@ -4,6 +4,13 @@ All notable changes to Swedish Cooking Companion will be documented in this file
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.1.1](https://github.com/tomasottosson/swedish-cooking-companion/compare/swedish-cooking-companion-v1.1.0...swedish-cooking-companion-v1.1.1) (2026-02-09)
+
+
+### Bug Fixes
+
+* correct API model info in README to mention both Haiku and Sonnet modes ([167ad0b](https://github.com/tomasottosson/swedish-cooking-companion/commit/167ad0b860aaded1e9ce4ef2b4b886c1ff4d23bc))
+
 ## [Unreleased]
 
 ## [1.1.0] - 2026-02-09
