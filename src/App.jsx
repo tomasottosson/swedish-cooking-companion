@@ -94,33 +94,58 @@ function App() {
         Hoppa till huvudinnehåll
       </a>
 
-      {/* Background nature-inspired decorative elements */}
+      {/* Background food-inspired decorative elements */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-        {/* Subtle organic shapes - green landscape */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 320" className="w-full opacity-20" preserveAspectRatio="none">
-            <path fill="#B5C9A0" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,208C1248,192,1344,192,1392,192L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" />
-          </svg>
-        </div>
+        {/* Gentle steam waves rising from bottom */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1440 320" className="w-full opacity-15" preserveAspectRatio="none">
-            <path fill="#A0B88A" d="M0,288L60,272C120,256,240,224,360,224C480,224,600,256,720,272C840,288,960,288,1080,266.7C1200,245,1320,203,1380,181.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z" />
+            <path fill="#C4693F" d="M0,256L40,250.7C80,245,160,235,240,218.7C320,203,400,181,480,186.7C560,192,640,224,720,234.7C800,245,880,235,960,218.7C1040,203,1120,181,1200,186.7C1280,192,1360,224,1400,240L1440,256L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z" />
           </svg>
         </div>
-        {/* Mountain silhouettes - sage green */}
-        <svg className="absolute bottom-24 right-0 w-80 h-48 opacity-10" viewBox="0 0 320 200">
-          <polygon points="160,10 280,180 40,180" fill="#5A8042" />
-          <polygon points="240,40 340,180 140,180" fill="#4A6E36" />
-          <polygon points="80,50 160,180 0,180" fill="#6B9050" />
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg viewBox="0 0 1440 320" className="w-full opacity-10" preserveAspectRatio="none">
+            <path fill="#B5C9A0" d="M0,288L60,272C120,256,240,224,360,229.3C480,235,600,267,720,272C840,277,960,256,1080,240C1200,224,1320,213,1380,208L1440,203L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z" />
+          </svg>
+        </div>
+        {/* Whisk silhouette */}
+        <svg className="absolute bottom-16 left-10 w-10 h-36 opacity-10" viewBox="0 0 40 140">
+          <rect x="17" y="70" width="6" height="60" rx="3" fill="#5A4D40" />
+          <ellipse cx="20" cy="40" rx="12" ry="38" fill="none" stroke="#5A4D40" strokeWidth="3" />
+          <line x1="20" y1="4" x2="20" y2="76" stroke="#5A4D40" strokeWidth="2" />
+          <path d="M12,8 Q20,45 28,8" fill="none" stroke="#5A4D40" strokeWidth="2" />
+          <path d="M10,15 Q20,55 30,15" fill="none" stroke="#5A4D40" strokeWidth="2" />
         </svg>
-        {/* Tree silhouettes */}
-        <svg className="absolute bottom-16 left-12 w-16 h-32 opacity-15" viewBox="0 0 60 120">
-          <ellipse cx="30" cy="40" rx="22" ry="35" fill="#5A8042" />
-          <rect x="26" y="70" width="8" height="30" fill="#3D5F2E" />
+        {/* Rolling pin silhouette */}
+        <svg className="absolute bottom-24 right-8 w-48 h-16 opacity-10" viewBox="0 0 200 60">
+          <rect x="40" y="18" width="120" height="24" rx="12" fill="#5A4D40" />
+          <rect x="10" y="24" width="35" height="12" rx="6" fill="#5A4D40" />
+          <rect x="155" y="24" width="35" height="12" rx="6" fill="#5A4D40" />
         </svg>
-        <svg className="absolute bottom-20 left-1/3 w-12 h-24 opacity-10" viewBox="0 0 60 120">
-          <ellipse cx="30" cy="40" rx="22" ry="35" fill="#5A8042" />
-          <rect x="26" y="70" width="8" height="30" fill="#3D5F2E" />
+        {/* Herb sprig (dill) */}
+        <svg className="absolute bottom-32 left-1/4 w-14 h-28 opacity-10" viewBox="0 0 50 100">
+          <path d="M25,95 Q25,50 25,10" fill="none" stroke="#5A8042" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M25,30 Q10,18 8,8" fill="none" stroke="#5A8042" strokeWidth="2" strokeLinecap="round" />
+          <path d="M25,30 Q40,18 42,8" fill="none" stroke="#5A8042" strokeWidth="2" strokeLinecap="round" />
+          <path d="M25,50 Q12,40 7,30" fill="none" stroke="#5A8042" strokeWidth="2" strokeLinecap="round" />
+          <path d="M25,50 Q38,40 43,30" fill="none" stroke="#5A8042" strokeWidth="2" strokeLinecap="round" />
+          <path d="M25,70 Q14,62 10,52" fill="none" stroke="#5A8042" strokeWidth="2" strokeLinecap="round" />
+          <path d="M25,70 Q36,62 40,52" fill="none" stroke="#5A8042" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+        {/* Cooking pot silhouette */}
+        <svg className="absolute bottom-12 right-1/4 w-20 h-20 opacity-8" viewBox="0 0 80 80">
+          <rect x="8" y="25" width="64" height="45" rx="6" fill="#5A4D40" />
+          <rect x="4" y="22" width="72" height="8" rx="4" fill="#5A4D40" />
+          <rect x="0" y="32" width="10" height="6" rx="3" fill="#5A4D40" />
+          <rect x="70" y="32" width="10" height="6" rx="3" fill="#5A4D40" />
+          <path d="M28,18 Q30,6 32,14" fill="none" stroke="#5A4D40" strokeWidth="2" strokeLinecap="round" />
+          <path d="M40,16 Q42,4 44,12" fill="none" stroke="#5A4D40" strokeWidth="2" strokeLinecap="round" />
+          <path d="M52,18 Q54,6 56,14" fill="none" stroke="#5A4D40" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+        {/* Wooden spoon silhouette */}
+        <svg className="absolute top-1/3 right-6 w-8 h-32 opacity-8" viewBox="0 0 30 120">
+          <ellipse cx="15" cy="18" rx="12" ry="16" fill="#5A4D40" />
+          <ellipse cx="15" cy="18" rx="6" ry="9" fill="#C4693F" opacity="0.3" />
+          <rect x="12" y="32" width="6" height="78" rx="3" fill="#5A4D40" />
         </svg>
       </div>
 
