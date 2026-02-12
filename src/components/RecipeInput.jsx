@@ -18,12 +18,12 @@ export default function RecipeInput({ onConvert, isLoading }) {
     setError('');
 
     if (file.size > 5 * 1024 * 1024) {
-      setError('Image must be smaller than 5MB');
+      setError('Bilden måste vara mindre än 5MB');
       return;
     }
 
     if (!file.type.startsWith('image/')) {
-      setError('Please select an image file');
+      setError('Vänligen välj en bild');
       return;
     }
 
@@ -62,12 +62,12 @@ export default function RecipeInput({ onConvert, isLoading }) {
     setError('');
 
     if (file.size > 5 * 1024 * 1024) {
-      setError('Image must be smaller than 5MB');
+      setError('Bilden måste vara mindre än 5MB');
       return;
     }
 
     if (!file.type.startsWith('image/')) {
-      setError('Please select an image file');
+      setError('Vänligen välj en bildfil');
       return;
     }
 
