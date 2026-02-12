@@ -4,6 +4,13 @@ All notable changes to Swedish Cooking Companion will be documented in this file
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.1.2](https://github.com/tomasottosson/swedish-cooking-companion/compare/swedish-cooking-companion-v1.1.1...swedish-cooking-companion-v1.1.2) (2026-02-12)
+
+
+### Bug Fixes
+
+* update error messages in Swedish for image upload validation ([3bd6b77](https://github.com/tomasottosson/swedish-cooking-companion/commit/3bd6b779ae54dbd3e7b0ffa89f79fb3e83a8392f))
+
 ## [1.1.1](https://github.com/tomasottosson/swedish-cooking-companion/compare/swedish-cooking-companion-v1.1.0...swedish-cooking-companion-v1.1.1) (2026-02-09)
 
 
