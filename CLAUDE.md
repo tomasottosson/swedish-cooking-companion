@@ -258,6 +258,19 @@ Key files:
 - **README.md** - User-facing documentation
 - **PROJECT_BRIEF.MD** - Original project requirements
 
+## Playwright MCP (Browser Automation)
+
+A Playwright MCP server is configured in `.mcp.json` for browser-based verification and UI testing.
+
+### Prerequisites
+- Start the dev server first: `npm run dev:all` (both proxy on :3001 and Vite on :3000)
+- First run downloads Chromium (~200MB, cached after that)
+
+### Usage Tips
+- Prefer `browser_snapshot` over `browser_take_screenshot` for routine checks — it returns the accessibility tree as text, which is faster and doesn't consume vision tokens
+- Use `browser_take_screenshot` when visual appearance matters (layout, colors, spacing)
+- Navigate to `http://localhost:3000` to interact with the app
+
 ## Future Enhancements
 
 - Recipe scaling (adjust servings)
