@@ -19,6 +19,9 @@ dist-ssr
 # Claude Code temp files
 tmpclaude-*
 
+# Playwright MCP storage state
+playwright-storage-state.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
