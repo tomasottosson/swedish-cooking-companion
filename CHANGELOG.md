@@ -4,6 +4,13 @@ All notable changes to Swedish Cooking Companion will be documented in this file
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.2.0](https://github.com/tomasottosson/swedish-cooking-companion/compare/swedish-cooking-companion-v1.1.2...swedish-cooking-companion-v1.2.0) (2026-03-14)
+
+
+### Features
+
+* add Playwright MCP configuration and usage instructions in CLAUDE.md ([#4](https://github.com/tomasottosson/swedish-cooking-companion/issues/4)) ([eeaf1f7](https://github.com/tomasottosson/swedish-cooking-companion/commit/eeaf1f779bb8f9ed2893c6626ffd734854cfc6c2))
+
 ## [1.1.2](https://github.com/tomasottosson/swedish-cooking-companion/compare/swedish-cooking-companion-v1.1.1...swedish-cooking-companion-v1.1.2) (2026-02-12)
 
 
