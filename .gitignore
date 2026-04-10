@@ -19,6 +19,9 @@ dist-ssr
 # Claude Code temp files
 tmpclaude-*
 
+# Claude Code local settings (personal tool allowlists)
+.claude/settings.local.json
+
 # Playwright MCP storage state
 playwright-storage-state.json
 
