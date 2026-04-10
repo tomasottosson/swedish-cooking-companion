@@ -26,7 +26,7 @@ A web application that converts international recipes into Swedish-adapted versi
 - **Styling**: Tailwind CSS
 - **AI**: Anthropic Claude API (Vision + Text)
 - **Storage**: Browser localStorage
-- **Deployment**: Azure Static Web Apps (frontend) + Azure App Service (proxy)
+- **Deployment**: Azure Static Web Apps (frontend + proxy as a Managed Function)
 
 ## Prerequisites
 
@@ -122,10 +122,11 @@ swedish-cooking-companion/
 │   ├── main.jsx                  # React entry point
 │   └── index.css                 # Global styles & Tailwind
 ├── public/                       # Static assets
+├── api/
+│   └── fetch-recipe/                  # SWA Managed Function (prod proxy)
 ├── .github/
 │   └── workflows/
-│       ├── azure-static-web-apps.yml  # Frontend CI/CD
-│       └── azure-app-service.yml      # Proxy server CI/CD
+│       └── azure-static-web-apps.yml  # Frontend + API CI/CD
 ├── .gitignore                    # Git ignore rules
 ├── .env.example                  # Environment variable template
 ├── .env.production               # Production environment config
@@ -226,22 +227,17 @@ The app doesn't just translate - it understands Swedish cooking culture:
 
 ## Deployment
 
-The app is deployed to Azure with automatic CI/CD via GitHub Actions:
+The app is deployed to [Azure Static Web Apps](https://azure.microsoft.com/en-us/products/app-service/static) (free tier) with automatic CI/CD via GitHub Actions on push to main. The frontend (`dist/`) and the proxy Managed Function (`api/fetch-recipe/`) deploy together in a single workflow run, both served from the same origin — so no CORS is needed in production.
 
-- **Frontend**: [Azure Static Web Apps](https://azure.microsoft.com/en-us/products/app-service/static) (free tier) — builds and deploys on push to main using GitHub OIDC authentication
-- **Proxy Server**: [Azure App Service](https://azure.microsoft.com/en-us/products/app-service) (free tier) — deploys `server.js` for CORS-free recipe URL fetching
+`server.js` is kept for local development only (`npm run dev:all`).
 
 ### Environment Variables
 
 | Variable | Where | Purpose |
 |----------|-------|---------|
-| `VITE_PROXY_URL` | GitHub Actions variable / `.env.production` | Proxy server URL for production builds |
-| `ALLOWED_ORIGINS` | Azure App Service config | Comma-separated CORS origins |
-| `PORT` | Azure App Service config | Server port (Azure default: 8080) |
-| `AZURE_WEBAPP_PUBLISH_PROFILE` | GitHub Actions secret | App Service deployment credential |
-| `AZURE_PROXY_APP_NAME` | GitHub Actions variable | App Service name for deployment |
-
-For local development, the proxy URL defaults to `http://localhost:3001` when `VITE_PROXY_URL` is not set.
+| `VITE_PROXY_URL` | `.env.production` (empty) / `.env.development` | Proxy base URL for the frontend. Empty in prod → same-origin `/api/fetch-recipe`; unset in dev → defaults to `http://localhost:3001` |
+| `ALLOWED_ORIGINS` | Local `.env` | Comma-separated CORS origins for `server.js` (local dev only) |
+| `PORT` | Local `.env` | Port for `server.js` (local dev only, defaults to 3001) |
 
 ## Future Enhancements (Phase 2)
 
