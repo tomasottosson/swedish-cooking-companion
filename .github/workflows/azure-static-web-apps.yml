@@ -30,9 +30,8 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "/"
+          api_location: "api"
           output_location: "dist"
-        env:
-          VITE_PROXY_URL: ${{ vars.VITE_PROXY_URL }}
 
   close_pull_request:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
