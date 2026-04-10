@@ -15,7 +15,7 @@ A React web app that converts international recipes into Swedish-adapted version
   - Claude Sonnet 4.5 (quality mode) - best results
 - **Browser localStorage** for persistence (API key + saved recipes)
 - **Express.js proxy server** for CORS-free URL fetching
-- **Azure Static Web Apps** (frontend hosting) + **Azure App Service** (proxy server)
+- **Azure Static Web Apps** hosts both the frontend and the proxy as a Managed Function (free tier)
 - **GitHub Actions** for CI/CD (auto-deploy on push to main)
 
 ## Project Structure
@@ -132,7 +132,7 @@ Contains the system prompt with all Swedification rules. This is the heart of th
 - `imageToBase64(file)` - Helper for image uploads (5MB limit)
 
 ### `server.js`
-Express.js proxy server that bypasses CORS restrictions when fetching recipe URLs. Must be running for URL-based recipe conversion. Deployed to Azure App Service in production.
+Express.js proxy server that bypasses CORS restrictions when fetching recipe URLs. **Local development only** — in production the same logic runs as an SWA Managed Function in `api/fetch-recipe/`.
 
 **Environment variables**:
 - `PORT` - Server port (default: 3001, Azure uses 8080)
@@ -234,7 +234,7 @@ Maintain proper heading structure for screen reader navigation:
 ## Important Constraints
 
 - **Image size limit:** 5MB max for uploaded recipe images
-- **Proxy server required:** URL conversion requires proxy server (localhost:3001 in dev, Azure App Service in prod)
+- **Proxy required for URL input:** localhost:3001 via `server.js` in dev; `/api/fetch-recipe` SWA Managed Function in prod
 - **Privacy-first:** No analytics, no external data storage
 - **User pays:** Users use their own API key and pay for usage
 - **CORS origins:** Configurable via `ALLOWED_ORIGINS` env var (defaults to localhost:3000 and localhost:5173)
@@ -242,15 +242,15 @@ Maintain proper heading structure for screen reader navigation:
 
 ## Deployment
 
-The app deploys to Azure via GitHub Actions on push to main:
+The app deploys to Azure Static Web Apps via GitHub Actions on push to main. Both the frontend (`dist/`) and the proxy Function (`api/`) are deployed in a single workflow run.
 
-- **Frontend** → Azure Static Web Apps (GitHub OIDC auth, no deployment token needed)
-- **Proxy server** → Azure App Service (publish profile secret)
+- **Frontend + API** → Azure Static Web Apps (Free tier, includes managed Functions at no extra cost)
+- The Function is served on the same origin as the SPA, so no CORS is needed in production
 
 Key files:
-- `.github/workflows/azure-static-web-apps.yml` - Frontend CI/CD
-- `.github/workflows/azure-app-service.yml` - Proxy server CI/CD
-- `.env.production` - Production `VITE_PROXY_URL` (committed, no secrets)
+- `.github/workflows/azure-static-web-apps.yml` - Frontend + API CI/CD (`api_location: "api"`)
+- `api/fetch-recipe/` - SWA Managed Function that bypasses CORS when fetching recipe URLs
+- `.env.production` - Sets `VITE_PROXY_URL=""` so the frontend calls the relative path `/api/fetch-recipe`
 
 ## Additional Documentation
 

@@ -1,0 +1,9 @@
+{
+  "name": "swedish-cooking-companion-api",
+  "version": "1.0.0",
+  "description": "Azure Static Web Apps managed Functions for Swedish Cooking Companion",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  }
+}
