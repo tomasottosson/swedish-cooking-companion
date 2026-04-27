@@ -252,6 +252,24 @@ Key files:
 - `api/fetch-recipe/` - SWA Managed Function that bypasses CORS when fetching recipe URLs
 - `.env.production` - Sets `VITE_PROXY_URL=""` so the frontend calls the relative path `/api/fetch-recipe`
 
+### Infrastructure (IaC)
+
+Azure resources are defined as Bicep in `infra/`:
+
+- `infra/main.bicep` - subscription-scope template; creates resource group `rg-swedish-cooking-companion` and invokes the SWA module
+- `infra/swa.bicep` - Free-tier `Microsoft.Web/staticSites` in West Europe
+
+To provision or re-apply infrastructure:
+
+```bash
+az deployment sub create \
+  --name swc-bootstrap \
+  --location westeurope \
+  --template-file infra/main.bicep
+```
+
+The SWA is intentionally not linked to the GitHub repo at the Azure side. The GitHub Actions workflow authenticates with the SWA deployment token stored in the `AZURE_STATIC_WEB_APPS_API_TOKEN` repo secret, so the SWA stays source-control-agnostic and the Bicep is the single source of truth for infrastructure.
+
 ## Additional Documentation
 
 - **CHANGELOG.md** - Version history and accessibility improvements
