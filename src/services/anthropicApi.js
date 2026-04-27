@@ -131,13 +131,13 @@ Remember: You're helping Swedish home cooks recreate international recipes with 
 // Model options for recipe conversion
 export const MODELS = {
   fast: {
-    id: 'claude-haiku-4-5-20251001',
-    name: 'Snabb (Haiku)',
+    id: 'claude-sonnet-4-6', 
+    name: 'Snabb (Sonnet)',
     description: 'Snabbare konvertering, lägre kostnad',
   },
   quality: {
-    id: 'claude-sonnet-4-5-20250929',
-    name: 'Kvalitet (Sonnet)',
+    id: 'claude-opus-4-7',
+    name: 'Kvalitet (Opus)',
     description: 'Bästa kvalitet, längre väntetid',
   },
 };
