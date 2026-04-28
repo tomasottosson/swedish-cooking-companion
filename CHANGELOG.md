@@ -4,6 +4,13 @@ All notable changes to Swedish Cooking Companion will be documented in this file
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.3.0](https://github.com/tomasottosson/swedish-cooking-companion/compare/swedish-cooking-companion-v1.2.0...swedish-cooking-companion-v1.3.0) (2026-04-27)
+
+
+### Features
+
+* move to Opus 4.7 and Sonnet 4.6 models ([1a9b080](https://github.com/tomasottosson/swedish-cooking-companion/commit/1a9b08074fb508422506dd6caab745bbfd544e7d))
+
 ## [1.2.0](https://github.com/tomasottosson/swedish-cooking-companion/compare/swedish-cooking-companion-v1.1.2...swedish-cooking-companion-v1.2.0) (2026-03-14)
 
 
