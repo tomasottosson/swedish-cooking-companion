@@ -11,8 +11,8 @@ A React web app that converts international recipes into Swedish-adapted version
 - **React 18** with Vite (fast dev server, HMR)
 - **Tailwind CSS** for styling
 - **Anthropic Claude API** with dual model support:
-  - Claude Sonnet 4.6 (fast mode) - quicker conversions, lower cost
-  - Claude Opus 4.7 (quality mode) - best results
+  - Claude Sonnet 5 (fast mode) - quicker conversions, lower cost
+  - Claude Opus 4.8 (quality mode) - best results
 - **Browser localStorage** for persistence (API key + saved recipes)
 - **Express.js proxy server** for CORS-free URL fetching
 - **Azure Static Web Apps** hosts both the frontend and the proxy as a Managed Function (free tier)
@@ -123,8 +123,8 @@ Swedish measurements:
 Contains the system prompt with all Swedification rules. This is the heart of the app. Modify here to improve recipe conversion quality.
 
 **Models** (defined at lines 132-143):
-- Fast mode: `claude-sonnet-4-6` - Claude Sonnet 4.6, faster and lower cost
-- Quality mode: `claude-opus-4-7` - Claude Sonnet 4.7, best quality results
+- Fast mode: `claude-sonnet-5` - Claude Sonnet 5, faster and lower cost
+- Quality mode: `claude-opus-4-8` - Claude Opus 4.8, best quality results
 
 **Exports**:
 - `MODELS` - Object with model configurations
